@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>二次元少女专属表情包精选（37款全系列）</title>
-  <meta name="description" content="长按即可直接添加到微信表情包或发送给好友！包含元气互动、日常萌态、经典动作全系列。">
+  <title>二次元少女专属表情包精选（46款全系列）</title>
+  <meta name="description" content="长按即可直接添加到微信表情包或发送给好友！包含第四弹萌趣贴纸、元气互动、日常萌态、经典动作全系列。">
   <meta name="theme-color" content="#fff0f5">
   
   <!-- Open Graph / WeChat Sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="二次元少女专属表情包精选（37款全系列）">
-  <meta property="og:description" content="长按即可直接添加到微信表情包或发送给好友！包含元气互动、日常萌态、经典动作全系列。">
-  <meta property="og:image" content="https://dengziqi64.github.io/anime-stickers/assets/p3/02_%E7%BB%99%E4%BD%A0%E5%B0%8F%E5%BF%83%E5%BF%83.gif">
+  <meta property="og:title" content="二次元少女专属表情包精选（46款全系列）">
+  <meta property="og:description" content="长按即可直接添加到微信表情包或发送给好友！包含萌趣贴纸、元气互动、日常萌态、经典动作全系列。">
+  <meta property="og:image" content="https://dengziqi64.github.io/anime-stickers/assets/p4/04_%E6%89%93call.gif">
   <meta property="og:url" content="https://dengziqi64.github.io/anime-stickers/">
 
   <style>
@@ -130,7 +130,7 @@
       overflow-x: auto;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
-      max-width: 760px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 2px 4px;
     }
@@ -148,7 +148,7 @@
       border: 1px solid var(--border);
       background: var(--card-bg);
       border-radius: 999px;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
@@ -271,11 +271,10 @@
       position: relative;
     }
 
-    /* Crucial: Pure touchable image for WeChat long-press context menu */
     .sticker-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       cursor: zoom-in;
       user-select: auto;
@@ -404,12 +403,15 @@
       margin: 12px 0 16px;
       background: #fafafa;
       border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .modal-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
       display: block;
       -webkit-touch-callout: default !important;
       user-select: auto;
@@ -497,7 +499,6 @@
       background: #06ad56;
     }
 
-    /* Toast Notification */
     .toast {
       position: fixed;
       top: 50%;
@@ -526,7 +527,7 @@
   <header class="header">
     <div class="header-badge">✨ 精选萌系表情 · 微信畅聊专属</div>
     <h1 class="header-title">二次元少女表情包画廊</h1>
-    <p class="header-sub">共收录 37 款超萌高清表情包与动态 GIF，专为微信聊天优化设计</p>
+    <p class="header-sub">共收录 46 款超萌高清表情包与动态 GIF，专为微信聊天优化设计</p>
   </header>
 
   <!-- WeChat Usage Tip -->
@@ -540,7 +541,12 @@
   <!-- Navigation Tabs -->
   <nav class="tabs-wrapper">
     <div class="tabs-container">
-      <button class="tab-btn active" onclick="switchTab('p3', this)">
+      <button class="tab-btn active" onclick="switchTab('p4', this)">
+        <span>✨</span>
+        <span>第四弹</span>
+        <span class="badge-pill">9</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('p3', this)">
         <span>🌟</span>
         <span>第三弹</span>
         <span class="badge-pill">9</span>
@@ -565,11 +571,221 @@
 
   <!-- Main Container -->
   <main class="container">
-    <section id="section-p3" class="section-block active">
+    <section id="section-p4" class="section-block active">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-title">✨ 第四弹 · 萌趣贴纸</h2>
+          <span style="font-size: 12px; color: var(--primary); font-weight: 600;">NEW 静态精选</span>
+        </div>
+        <p class="section-desc">最新日常生动贴纸，透明底透亮精切，包含吃拉面、吃西瓜、打call、猫娘等高萌神态</p>
+      </div>
+
+      <div class="sticker-grid">
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif" 
+                 alt="吃拉面" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif', '吃拉面', '30 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">吃拉面</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>30 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif', '吃拉面', '30 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif" download="01_吃拉面.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif" 
+                 alt="偷偷看" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif', '偷偷看', '25 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">偷偷看</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>25 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif', '偷偷看', '25 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif" download="02_偷偷看.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif" 
+                 alt="吃西瓜" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif', '吃西瓜', '29 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">吃西瓜</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>29 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif', '吃西瓜', '29 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif" download="03_吃西瓜.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/04_%E6%89%93call.gif" 
+                 alt="打call" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/04_%E6%89%93call.gif', '打call', '33 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">打call</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>33 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/04_%E6%89%93call.gif', '打call', '33 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/04_%E6%89%93call.gif" download="04_打call.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif" 
+                 alt="眼冒金星" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif', '眼冒金星', '29 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">眼冒金星</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>29 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif', '眼冒金星', '29 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif" download="05_眼冒金星.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif" 
+                 alt="考了一百分" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif', '考了一百分', '28 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">考了一百分</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>28 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif', '考了一百分', '28 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif" download="06_考了一百分.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif" 
+                 alt="变身猫娘" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif', '变身猫娘', '31 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">变身猫娘</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>31 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif', '变身猫娘', '31 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif" download="07_变身猫娘.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif" 
+                 alt="疑惑问号" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif', '疑惑问号', '27 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">疑惑问号</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>27 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif', '疑惑问号', '27 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif" download="08_疑惑问号.gif">💾 保存</a>
+          </div>
+        </div>
+        <div class="sticker-card">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif" 
+                 alt="温暖喝茶" 
+                 loading="lazy"
+                 onclick="openModal('assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif', '温暖喝茶', '27 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">温暖喝茶</div>
+            <div class="sticker-meta">
+              <span>GIF</span>
+              <span>•</span>
+              <span>27 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif', '温暖喝茶', '27 KB')">🔍 放大</button>
+            <a class="btn btn-dl" href="assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif" download="09_温暖喝茶.gif">💾 保存</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="section-p3" class="section-block">
       <div class="section-header">
         <div class="section-title-wrap">
           <h2 class="section-title">🌟 第三弹 · 元气互动</h2>
-          <span style="font-size: 12px; color: var(--primary); font-weight: 600;">NEW 最新精选</span>
+          <span style="font-size: 12px; color: var(--primary); font-weight: 600;">动态微动效</span>
         </div>
         <p class="section-desc">最新视频精心剪辑，24 FPS 丝滑微动效，包含比心、懂了、快看等元气神态</p>
       </div>
@@ -1432,7 +1648,7 @@
   <!-- Bottom Bar -->
   <div class="bottom-bar">
     <div class="bottom-left">
-      <strong>全系列 37 款表情</strong>
+      <strong>全系列 46 款表情</strong>
       <div>适配微信 / QQ / 浏览器长按保存</div>
     </div>
     <div class="bottom-right">
@@ -1462,7 +1678,6 @@
   <div id="toast" class="toast">提示信息</div>
 
   <script>
-    // Tab switching
     function switchTab(id, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -1473,7 +1688,6 @@
       }
     }
 
-    // Lightbox modal
     let currentModalPath = '';
     function openModal(path, title, size) {
       currentModalPath = path;
@@ -1499,7 +1713,6 @@
       }
     }
 
-    // Show toast message
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.innerText = msg;
@@ -1509,7 +1722,6 @@
       }, 2000);
     }
 
-    // Copy image direct link
     function copyImageLink() {
       const fullUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/') + currentModalPath;
       if (navigator.clipboard) {
@@ -1523,11 +1735,10 @@
       }
     }
 
-    // Share website
     function shareWebsite() {
       const shareData = {
-        title: '二次元少女专属表情包精选（37款）',
-        text: '超全动态GIF表情包，长按直接添加到微信表情！',
+        title: '二次元少女专属表情包精选（46款）',
+        text: '超全萌系表情包画廊，长按直接添加到微信表情！',
         url: window.location.href
       };
       if (navigator.share) {
