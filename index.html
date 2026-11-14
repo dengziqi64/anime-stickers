@@ -558,6 +558,203 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+  
+    /* WeChat Guide Banner & WeChat Native Integration */
+    .wechat-guide-banner {
+      background: linear-gradient(135deg, #07c160 0%, #10b981 100%);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin: 16px auto 22px;
+      max-width: 860px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 8px 24px rgba(7, 193, 96, 0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .wechat-guide-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(7, 193, 96, 0.35);
+    }
+    .wgb-icon {
+      font-size: 30px;
+      flex-shrink: 0;
+      animation: bounceSoft 2s infinite ease-in-out;
+    }
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .wgb-content {
+      flex: 1;
+      text-align: left;
+    }
+    .wgb-title {
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wgb-badge {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.28);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: auto;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .wgb-desc {
+      font-size: 12.5px;
+      opacity: 0.95;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    /* WeChat Save Tip in Modal */
+    .wechat-save-pill {
+      background: #e8f9f0;
+      border: 1.5px solid #07c160;
+      color: #07c160;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 11px 16px;
+      margin: 12px 0 14px;
+      text-align: center;
+      line-height: 1.5;
+      display: none;
+    }
+    .wechat-save-pill.show {
+      display: block;
+      animation: pulseWechat 2s infinite;
+    }
+    @keyframes pulseWechat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    /* Tutorial Dialog Overlay */
+    .tutorial-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .tutorial-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .tutorial-box {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 540px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      text-align: left;
+    }
+    .tutorial-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid #f3f4f6;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .tutorial-header h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111827;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tutorial-close {
+      background: #f3f4f6;
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      color: #6b7280;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .tutorial-close:hover {
+      background: #e5e7eb;
+    }
+    .tutorial-intro {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #92400e;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .tutorial-step {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .ts-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #07c160;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .ts-desc {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .ts-desc b {
+      color: #111827;
+      background: #e5e7eb;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .tutorial-footer-btn {
+      width: 100%;
+      background: #07c160;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(7, 193, 96, 0.25);
+    }
+
   </style>
 </head>
 <body>
@@ -5364,6 +5561,7 @@
       <div class="modal-img-wrap">
         <img id="modalImg" class="modal-img" src="" alt="表情大图">
       </div>
+      <div id="wechatSavePill" class="wechat-save-pill">👆 微信专属提示：长按上方大图，在弹出菜单选择【保存图片】或【发送给朋友】（发给文件传输助手长按即可添加到微信表情包，无需跳出浏览器！）</div>
       <div class="modal-tip">📱 长按上方大图即可添加微信表情或发送好友</div>
       <div class="modal-actions">
         <a id="modalDlBtn" class="btn btn-main" href="" download="">💾 下载原文件</a>
@@ -5480,6 +5678,113 @@
     function promptCopy(text) {
       prompt('请长按复制链接发给微信好友：', text);
     }
+  
+    // WeChat In-App Environment Integration
+    const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+    
+    // Auto-adapt for WeChat In-App Browser
+    if (isWeChat) {
+      document.addEventListener('DOMContentLoaded', () => {
+        const badge = document.querySelector('.header-badge');
+        if (badge) {
+          badge.innerHTML = '🟢 微信内置浏览器专属模式 · 长按免跳出直接存';
+          badge.style.background = '#e8f9f0';
+          badge.style.color = '#07c160';
+        }
+        const pill = document.getElementById('wechatSavePill');
+        if (pill) pill.classList.add('show');
+      });
+
+      // Intercept download clicks in WeChat to prevent external browser redirect
+      document.addEventListener('click', function(e) {
+        const dlBtn = e.target.closest('a[download], .btn-download');
+        if (dlBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          const card = dlBtn.closest('.sticker-card');
+          if (card) {
+            const img = card.querySelector('img');
+            const title = card.getAttribute('data-title') || '表情包';
+            if (img) {
+              openModal(img.src, title, '微信免跳出');
+              showToast('👆 请长按弹出的大图，直接选择保存或发送好友');
+            }
+          } else if (dlBtn.id === 'modalDlBtn') {
+            showToast('👆 请直接长按上方透明图片保存');
+          }
+        }
+      }, true);
+    }
+
+    function openWeChatGuide() {
+      const modal = document.getElementById('tutorialOverlay');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeWeChatGuide() {
+      const modal = document.getElementById('tutorialOverlay');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeTutorialOnBg(e) {
+      if (e.target.id === 'tutorialOverlay') {
+        closeWeChatGuide();
+      }
+    }
+
   </script>
+
+  <!-- WeChat Tutorial Modal -->
+  <div id="tutorialOverlay" class="tutorial-overlay" onclick="closeTutorialOnBg(event)">
+    <div class="tutorial-box">
+      <div class="tutorial-header">
+        <h2>💡 微信添加为表情包完整指引</h2>
+        <button class="tutorial-close" onclick="closeWeChatGuide()">✕</button>
+      </div>
+      <div class="tutorial-intro">
+        <b>为什么直接在微信相册发送只能算图片？</b><br>
+        微信机制限制：聊天框选择“相册发送”会被强制判定为大图，微信去掉了直接转表情按钮。请用以下 3 种官方正规方法，直接存入微信表情库！
+      </div>
+
+      <div class="tutorial-step">
+        <div class="ts-title">⭐ 方法一：手机微信官方【添加单个表情】（最推荐，永久保留透明底）</div>
+        <div class="ts-desc">
+          1. 在本网页点击表情图片，长按选择<b>【保存图片】</b>存入手机相册；<br>
+          2. 打开微信，点击右下角 <b>【我】</b> ➔ <b>【表情】</b>；<br>
+          3. 点击右上角 <b>【⚙️ 设置】</b> 齿轮 ➔ <b>【添加的单个表情】</b>；<br>
+          4. 滑动到底部点击 <b>【➕】加号</b>，直接选择刚保存的透明表情包图片导入；<br>
+          5. <b>瞬间永久存入表情面板</b>，以后在任何聊天窗口随时一键发送！
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="ts-title">🚀 方法二：在微信内直接长按【发送给朋友】（免存相册）</div>
+        <div class="ts-desc">
+          1. 在微信内置浏览器浏览本网页，点击任意表情包展开大图；<br>
+          2. <b>长按图片</b>，在微信原生菜单中选择 <b>【发送给朋友】</b>；<br>
+          3. 发送给 <b>“文件传输助手”</b> 或好友；<br>
+          4. 在聊天框中<b>长按这条发出的图片</b>，菜单里直接点击 <b>【添加表情】</b> 即可！
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="ts-title">💻 方法三：电脑微信拖入一键添加（电脑端最爽）</div>
+        <div class="ts-desc">
+          1. 将桌面文件夹 <b>【二次元少女表情包】</b> 里的 PNG 表情拖入微信聊天框发送；<br>
+          2. 鼠标右键点击发出的表情 ➔ 直接选择 <b>【添加到表情】</b>；<br>
+          3. <b>手机端微信会自动云同步</b>，手机聊天随时直接用！
+        </div>
+      </div>
+
+      <button class="tutorial-footer-btn" onclick="closeWeChatGuide()">我知道了，开始挑选表情！</button>
+    </div>
+  </div>
+
 </body>
 </html>
