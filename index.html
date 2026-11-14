@@ -755,6 +755,58 @@
       box-shadow: 0 4px 12px rgba(7, 193, 96, 0.25);
     }
 
+  
+    /* Format Switcher Styles */
+    .format-switcher-container {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      padding: 0 16px;
+    }
+    .format-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: 18px;
+      gap: 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+    .format-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .format-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .format-btn#btnFormatGif.active {
+      color: #07c160;
+    }
+    .fb-badge {
+      font-size: 11px;
+      background: #e2e8f0;
+      color: #475569;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .format-btn.active .fb-badge {
+      background: #e8f9f0;
+      color: #07c160;
+    }
+    
   </style>
 </head>
 <body>
@@ -5738,6 +5790,58 @@
       }
     }
 
+  
+    // Format Switching Logic (GIF for WeChat / PNG for HD)
+    let currentFormat = 'gif';
+    
+    function switchFormat(fmt) {
+      currentFormat = fmt;
+      document.getElementById('btnFormatGif').classList.toggle('active', fmt === 'gif');
+      document.getElementById('btnFormatPng').classList.toggle('active', fmt === 'png');
+      
+      const vTag = 'v=' + Date.now();
+      
+      document.querySelectorAll('.sticker-card').forEach(card => {
+        const img = card.querySelector('img');
+        if (!img) return;
+        let src = img.getAttribute('src');
+        if (fmt === 'gif') {
+          src = src.replace('.png', '.gif');
+        } else {
+          src = src.replace('.gif', '.png');
+        }
+        // Retain query param
+        src = src.split('?')[0] + '?' + vTag;
+        img.src = src;
+        
+        // Update download button
+        const dlBtn = card.querySelector('.btn-download');
+        if (dlBtn) {
+          dlBtn.href = src;
+          dlBtn.setAttribute('download', src.split('/').pop().split('?')[0]);
+        }
+        
+        // Update card meta
+        const meta = card.querySelector('.sticker-meta');
+        if (meta) {
+          if (fmt === 'gif') {
+            meta.innerText = '微信表情 GIF · ~65 KB';
+          } else {
+            meta.innerText = '高清透明 PNG · ~150 KB';
+          }
+        }
+      });
+      
+      showToast(fmt === 'gif' ? '🟢 已切换为【微信直发 GIF 表情】：发好友长按直接出现【添加表情】！' : '🖼️ 已切换为【高清透明 PNG】：适合相册高清保存');
+    }
+
+    // Default to GIF format automatically in WeChat
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isWeChat) {
+        switchFormat('gif');
+      }
+    });
+    
   </script>
 
   <!-- WeChat Tutorial Modal -->
