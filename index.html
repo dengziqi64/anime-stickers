@@ -807,6 +807,102 @@
       color: #07c160;
     }
     
+  
+    /* Quick Action Banner - 一键保存全部 */
+    .quick-action-bar {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .btn-save-all-main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 680px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #ff6b8b 0%, #ff8e53 50%, #ff6b8b 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite;
+      border-radius: 16px;
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(255, 107, 139, 0.35);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-save-all-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(255, 107, 139, 0.45);
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .save-all-icon {
+      font-size: 32px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    }
+    .save-all-info {
+      flex: 1;
+      text-align: left;
+    }
+    .save-all-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .save-all-desc {
+      font-size: 12px;
+      opacity: 0.92;
+      margin-top: 3px;
+    }
+    .save-all-badge {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+    }
+    @media (max-width: 600px) {
+      .btn-save-all-main {
+        padding: 12px 16px;
+        gap: 12px;
+      }
+      .save-all-title {
+        font-size: 15px;
+      }
+      .save-all-badge {
+        display: none;
+      }
+    }
+
+    /* 一键保存按钮动效与高亮 */
+    .btn-card-save {
+      background: linear-gradient(135deg, rgba(255, 107, 139, 0.12) 0%, rgba(255, 142, 83, 0.12) 100%) !important;
+      color: #ff5277 !important;
+      border: 1px solid rgba(255, 107, 139, 0.3) !important;
+      font-weight: 600 !important;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-card-save:hover {
+      background: linear-gradient(135deg, #ff6b8b 0%, #ff8e53 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(255, 107, 139, 0.35) !important;
+      transform: translateY(-1px);
+    }
+    .btn-card-save.saved {
+      background: #10b981 !important;
+      color: #ffffff !important;
+      border-color: #10b981 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -815,7 +911,7 @@
   <header class="header">
     <div class="header-badge">✨ 全套精选萌系表情 · 微信畅聊专属</div>
     <h1 class="header-title">二次元少女表情包画廊</h1>
-    <p class="header-sub">共收录 22 大主题 · 199 款超萌高清表情包与动态 GIF，专为微信聊天优化设计</p>
+    <p class="header-sub">共收录 23 大主题 · 208 款超萌高清透明 GIF 表情包，专为微信聊天优化设计（发好友长按直接添加为表情包）</p>
   </header>
 
   <!-- WeChat Usage Tip -->
@@ -824,6 +920,19 @@
     <div>
       <strong>微信使用秘诀：</strong>在微信中打开本网页，<strong>长按任意表情图片</strong>，即可直接弹出菜单选择【发送给朋友】或【添加到表情包】！
     </div>
+  </div>
+
+  
+  <!-- Quick Action Banner (一键保存全部) -->
+  <div class="quick-action-bar">
+    <a href="assets/二次元少女表情包_全量208款_微信直发GIF专享.zip" download="二次元少女表情包_全量208款_微信直发GIF专享.zip" class="btn-save-all-main" id="btnSaveAllZip" onclick="onSaveAllClick()">
+      <div class="save-all-icon">📦</div>
+      <div class="save-all-info">
+        <div class="save-all-title">一键保存全部表情包 (全量208款 ZIP)</div>
+        <div class="save-all-desc">微信直发透明 GIF · 拖入直接是表情包 · 25.9 MB</div>
+      </div>
+      <div class="save-all-badge">极速一键下载 ⬇️</div>
+    </a>
   </div>
 
   <!-- Search Box -->
@@ -944,6 +1053,11 @@
         <span>原画切片</span>
         <span class="badge-pill">9</span>
       </button>
+      <button class="tab-btn " onclick="switchTab('p0', this)">
+        <span>⚡</span>
+        <span>第00弹</span>
+        <span class="badge-pill">9</span>
+      </button>
     </div>
   </nav>
 
@@ -978,7 +1092,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/01_%E7%94%B5%E5%BD%B1%E6%89%93%E6%9D%BF.gif?v=wechat_gif_1794823386', '电影打板', '65.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/01_%E7%94%B5%E5%BD%B1%E6%89%93%E6%9D%BF.gif?v=wechat_gif_1794823386" download="01_电影打板.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/01_%E7%94%B5%E5%BD%B1%E6%89%93%E6%9D%BF.gif?v=wechat_gif_1794823386" download="01_电影打板.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="福尔摩斯侦探">
@@ -1000,7 +1114,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/02_%E7%A6%8F%E5%B0%94%E6%91%A9%E6%96%AF%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386', '福尔摩斯侦探', '68.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/02_%E7%A6%8F%E5%B0%94%E6%91%A9%E6%96%AF%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386" download="02_福尔摩斯侦探.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/02_%E7%A6%8F%E5%B0%94%E6%91%A9%E6%96%AF%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386" download="02_福尔摩斯侦探.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="奶茶丸子头">
@@ -1022,7 +1136,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/03_%E5%A5%B6%E8%8C%B6%E4%B8%B8%E5%AD%90%E5%A4%B4.gif?v=wechat_gif_1794823386', '奶茶丸子头', '70.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/03_%E5%A5%B6%E8%8C%B6%E4%B8%B8%E5%AD%90%E5%A4%B4.gif?v=wechat_gif_1794823386" download="03_奶茶丸子头.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/03_%E5%A5%B6%E8%8C%B6%E4%B8%B8%E5%AD%90%E5%A4%B4.gif?v=wechat_gif_1794823386" download="03_奶茶丸子头.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="啦啦队加油">
@@ -1044,7 +1158,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/04_%E5%95%A6%E5%95%A6%E9%98%9F%E5%8A%A0%E6%B2%B9.gif?v=wechat_gif_1794823386', '啦啦队加油', '64.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/04_%E5%95%A6%E5%95%A6%E9%98%9F%E5%8A%A0%E6%B2%B9.gif?v=wechat_gif_1794823386" download="04_啦啦队加油.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/04_%E5%95%A6%E5%95%A6%E9%98%9F%E5%8A%A0%E6%B2%B9.gif?v=wechat_gif_1794823386" download="04_啦啦队加油.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="烦躁抓头">
@@ -1066,7 +1180,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/05_%E7%83%A6%E8%BA%81%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386', '烦躁抓头', '65.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/05_%E7%83%A6%E8%BA%81%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386" download="05_烦躁抓头.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/05_%E7%83%A6%E8%BA%81%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386" download="05_烦躁抓头.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="愤怒挥拳">
@@ -1088,7 +1202,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/06_%E6%84%A4%E6%80%92%E6%8C%A5%E6%8B%B3.gif?v=wechat_gif_1794823386', '愤怒挥拳', '69.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/06_%E6%84%A4%E6%80%92%E6%8C%A5%E6%8B%B3.gif?v=wechat_gif_1794823386" download="06_愤怒挥拳.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/06_%E6%84%A4%E6%80%92%E6%8C%A5%E6%8B%B3.gif?v=wechat_gif_1794823386" download="06_愤怒挥拳.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="麦克风唱歌">
@@ -1110,7 +1224,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/07_%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%94%B1%E6%AD%8C.gif?v=wechat_gif_1794823386', '麦克风唱歌', '69.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/07_%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%94%B1%E6%AD%8C.gif?v=wechat_gif_1794823386" download="07_麦克风唱歌.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/07_%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%94%B1%E6%AD%8C.gif?v=wechat_gif_1794823386" download="07_麦克风唱歌.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="画家调色盘">
@@ -1132,7 +1246,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/08_%E7%94%BB%E5%AE%B6%E8%B0%83%E8%89%B2%E7%9B%98.gif?v=wechat_gif_1794823386', '画家调色盘', '65.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/08_%E7%94%BB%E5%AE%B6%E8%B0%83%E8%89%B2%E7%9B%98.gif?v=wechat_gif_1794823386" download="08_画家调色盘.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/08_%E7%94%BB%E5%AE%B6%E8%B0%83%E8%89%B2%E7%9B%98.gif?v=wechat_gif_1794823386" download="08_画家调色盘.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="数位板画画">
@@ -1154,7 +1268,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p21/09_%E6%95%B0%E4%BD%8D%E6%9D%BF%E7%94%BB%E7%94%BB.gif?v=wechat_gif_1794823386', '数位板画画', '64.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p21/09_%E6%95%B0%E4%BD%8D%E6%9D%BF%E7%94%BB%E7%94%BB.gif?v=wechat_gif_1794823386" download="09_数位板画画.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p21/09_%E6%95%B0%E4%BD%8D%E6%9D%BF%E7%94%BB%E7%94%BB.gif?v=wechat_gif_1794823386" download="09_数位板画画.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -1188,7 +1302,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/01_%E9%83%81%E9%87%91%E9%A6%99%E8%8A%B1%E6%9D%9F.gif?v=wechat_gif_1794823386', '郁金香花束', '59.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/01_%E9%83%81%E9%87%91%E9%A6%99%E8%8A%B1%E6%9D%9F.gif?v=wechat_gif_1794823386" download="01_郁金香花束.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/01_%E9%83%81%E9%87%91%E9%A6%99%E8%8A%B1%E6%9D%9F.gif?v=wechat_gif_1794823386" download="01_郁金香花束.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="星星眼惊喜">
@@ -1210,7 +1324,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/02_%E6%98%9F%E6%98%9F%E7%9C%BC%E6%83%8A%E5%96%9C.gif?v=wechat_gif_1794823386', '星星眼惊喜', '60.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/02_%E6%98%9F%E6%98%9F%E7%9C%BC%E6%83%8A%E5%96%9C.gif?v=wechat_gif_1794823386" download="02_星星眼惊喜.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/02_%E6%98%9F%E6%98%9F%E7%9C%BC%E6%83%8A%E5%96%9C.gif?v=wechat_gif_1794823386" download="02_星星眼惊喜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="企鹅连帽衫">
@@ -1232,7 +1346,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/03_%E4%BC%81%E9%B9%85%E8%BF%9E%E5%B8%BD%E8%A1%AB.gif?v=wechat_gif_1794823386', '企鹅连帽衫', '58.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/03_%E4%BC%81%E9%B9%85%E8%BF%9E%E5%B8%BD%E8%A1%AB.gif?v=wechat_gif_1794823386" download="03_企鹅连帽衫.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/03_%E4%BC%81%E9%B9%85%E8%BF%9E%E5%B8%BD%E8%A1%AB.gif?v=wechat_gif_1794823386" download="03_企鹅连帽衫.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="笔电灵感">
@@ -1254,7 +1368,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/04_%E7%AC%94%E7%94%B5%E7%81%B5%E6%84%9F.gif?v=wechat_gif_1794823386', '笔电灵感', '56.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/04_%E7%AC%94%E7%94%B5%E7%81%B5%E6%84%9F.gif?v=wechat_gif_1794823386" download="04_笔电灵感.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/04_%E7%AC%94%E7%94%B5%E7%81%B5%E6%84%9F.gif?v=wechat_gif_1794823386" download="04_笔电灵感.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃热香饼">
@@ -1276,7 +1390,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/05_%E5%90%83%E7%83%AD%E9%A6%99%E9%A5%BC.gif?v=wechat_gif_1794823386', '吃热香饼', '58.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/05_%E5%90%83%E7%83%AD%E9%A6%99%E9%A5%BC.gif?v=wechat_gif_1794823386" download="05_吃热香饼.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/05_%E5%90%83%E7%83%AD%E9%A6%99%E9%A5%BC.gif?v=wechat_gif_1794823386" download="05_吃热香饼.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="双手捧雪球">
@@ -1298,7 +1412,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/06_%E5%8F%8C%E6%89%8B%E6%8D%A7%E9%9B%AA%E7%90%83.gif?v=wechat_gif_1794823386', '双手捧雪球', '59.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/06_%E5%8F%8C%E6%89%8B%E6%8D%A7%E9%9B%AA%E7%90%83.gif?v=wechat_gif_1794823386" download="06_双手捧雪球.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/06_%E5%8F%8C%E6%89%8B%E6%8D%A7%E9%9B%AA%E7%90%83.gif?v=wechat_gif_1794823386" download="06_双手捧雪球.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="被窝探头">
@@ -1320,7 +1434,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/07_%E8%A2%AB%E7%AA%9D%E6%8E%A2%E5%A4%B4.gif?v=wechat_gif_1794823386', '被窝探头', '54.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/07_%E8%A2%AB%E7%AA%9D%E6%8E%A2%E5%A4%B4.gif?v=wechat_gif_1794823386" download="07_被窝探头.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/07_%E8%A2%AB%E7%AA%9D%E6%8E%A2%E5%A4%B4.gif?v=wechat_gif_1794823386" download="07_被窝探头.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="哑铃健身">
@@ -1342,7 +1456,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/08_%E5%93%91%E9%93%83%E5%81%A5%E8%BA%AB.gif?v=wechat_gif_1794823386', '哑铃健身', '61.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/08_%E5%93%91%E9%93%83%E5%81%A5%E8%BA%AB.gif?v=wechat_gif_1794823386" download="08_哑铃健身.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/08_%E5%93%91%E9%93%83%E5%81%A5%E8%BA%AB.gif?v=wechat_gif_1794823386" download="08_哑铃健身.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="泡泡浴小黄鸭">
@@ -1364,7 +1478,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p20/09_%E6%B3%A1%E6%B3%A1%E6%B5%B4%E5%B0%8F%E9%BB%84%E9%B8%AD.gif?v=wechat_gif_1794823386', '泡泡浴小黄鸭', '55.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p20/09_%E6%B3%A1%E6%B3%A1%E6%B5%B4%E5%B0%8F%E9%BB%84%E9%B8%AD.gif?v=wechat_gif_1794823386" download="09_泡泡浴小黄鸭.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p20/09_%E6%B3%A1%E6%B3%A1%E6%B5%B4%E5%B0%8F%E9%BB%84%E9%B8%AD.gif?v=wechat_gif_1794823386" download="09_泡泡浴小黄鸭.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -1398,7 +1512,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/01_%E5%92%94%E5%9A%93%E6%8B%8D%E7%85%A7.gif?v=wechat_gif_1794823386', '咔嚓拍照', '59.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/01_%E5%92%94%E5%9A%93%E6%8B%8D%E7%85%A7.gif?v=wechat_gif_1794823386" download="01_咔嚓拍照.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/01_%E5%92%94%E5%9A%93%E6%8B%8D%E7%85%A7.gif?v=wechat_gif_1794823386" download="01_咔嚓拍照.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="雨衣小熊">
@@ -1420,7 +1534,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/02_%E9%9B%A8%E8%A1%A3%E5%B0%8F%E7%86%8A.gif?v=wechat_gif_1794823386', '雨衣小熊', '56.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/02_%E9%9B%A8%E8%A1%A3%E5%B0%8F%E7%86%8A.gif?v=wechat_gif_1794823386" download="02_雨衣小熊.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/02_%E9%9B%A8%E8%A1%A3%E5%B0%8F%E7%86%8A.gif?v=wechat_gif_1794823386" download="02_雨衣小熊.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="灯泡苦读">
@@ -1442,7 +1556,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/03_%E7%81%AF%E6%B3%A1%E8%8B%A6%E8%AF%BB.gif?v=wechat_gif_1794823386', '灯泡苦读', '59.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/03_%E7%81%AF%E6%B3%A1%E8%8B%A6%E8%AF%BB.gif?v=wechat_gif_1794823386" download="03_灯泡苦读.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/03_%E7%81%AF%E6%B3%A1%E8%8B%A6%E8%AF%BB.gif?v=wechat_gif_1794823386" download="03_灯泡苦读.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="雪花耳罩热饮">
@@ -1464,7 +1578,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/04_%E9%9B%AA%E8%8A%B1%E8%80%B3%E7%BD%A9%E7%83%AD%E9%A5%AE.gif?v=wechat_gif_1794823386', '雪花耳罩热饮', '61.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/04_%E9%9B%AA%E8%8A%B1%E8%80%B3%E7%BD%A9%E7%83%AD%E9%A5%AE.gif?v=wechat_gif_1794823386" download="04_雪花耳罩热饮.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/04_%E9%9B%AA%E8%8A%B1%E8%80%B3%E7%BD%A9%E7%83%AD%E9%A5%AE.gif?v=wechat_gif_1794823386" download="04_雪花耳罩热饮.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拥抱柴犬">
@@ -1486,7 +1600,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/05_%E6%8B%A5%E6%8A%B1%E6%9F%B4%E7%8A%AC.gif?v=wechat_gif_1794823386', '拥抱柴犬', '59.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/05_%E6%8B%A5%E6%8A%B1%E6%9F%B4%E7%8A%AC.gif?v=wechat_gif_1794823386" download="05_拥抱柴犬.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/05_%E6%8B%A5%E6%8A%B1%E6%9F%B4%E7%8A%AC.gif?v=wechat_gif_1794823386" download="05_拥抱柴犬.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="手柄打游戏">
@@ -1508,7 +1622,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/06_%E6%89%8B%E6%9F%84%E6%89%93%E6%B8%B8%E6%88%8F.gif?v=wechat_gif_1794823386', '手柄打游戏', '60.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/06_%E6%89%8B%E6%9F%84%E6%89%93%E6%B8%B8%E6%88%8F.gif?v=wechat_gif_1794823386" download="06_手柄打游戏.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/06_%E6%89%8B%E6%9F%84%E6%89%93%E6%B8%B8%E6%88%8F.gif?v=wechat_gif_1794823386" download="06_手柄打游戏.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="草帽浇花">
@@ -1530,7 +1644,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/07_%E8%8D%89%E5%B8%BD%E6%B5%87%E8%8A%B1.gif?v=wechat_gif_1794823386', '草帽浇花', '56.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/07_%E8%8D%89%E5%B8%BD%E6%B5%87%E8%8A%B1.gif?v=wechat_gif_1794823386" download="07_草帽浇花.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/07_%E8%8D%89%E5%B8%BD%E6%B5%87%E8%8A%B1.gif?v=wechat_gif_1794823386" download="07_草帽浇花.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="背包旅游">
@@ -1552,7 +1666,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/08_%E8%83%8C%E5%8C%85%E6%97%85%E6%B8%B8.gif?v=wechat_gif_1794823386', '背包旅游', '58.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/08_%E8%83%8C%E5%8C%85%E6%97%85%E6%B8%B8.gif?v=wechat_gif_1794823386" download="08_背包旅游.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/08_%E8%83%8C%E5%8C%85%E6%97%85%E6%B8%B8.gif?v=wechat_gif_1794823386" download="08_背包旅游.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="爆米花看电影">
@@ -1574,7 +1688,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p19/09_%E7%88%86%E7%B1%B3%E8%8A%B1%E7%9C%8B%E7%94%B5%E5%BD%B1.gif?v=wechat_gif_1794823386', '爆米花看电影', '58.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p19/09_%E7%88%86%E7%B1%B3%E8%8A%B1%E7%9C%8B%E7%94%B5%E5%BD%B1.gif?v=wechat_gif_1794823386" download="09_爆米花看电影.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p19/09_%E7%88%86%E7%B1%B3%E8%8A%B1%E7%9C%8B%E7%94%B5%E5%BD%B1.gif?v=wechat_gif_1794823386" download="09_爆米花看电影.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -1608,7 +1722,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/01_%E7%88%B1%E5%BF%83%E6%AF%94%E5%BF%83.gif?v=wechat_gif_1794823386', '爱心比心', '60.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/01_%E7%88%B1%E5%BF%83%E6%AF%94%E5%BF%83.gif?v=wechat_gif_1794823386" download="01_爱心比心.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/01_%E7%88%B1%E5%BF%83%E6%AF%94%E5%BF%83.gif?v=wechat_gif_1794823386" download="01_爱心比心.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="早安阳光">
@@ -1630,7 +1744,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/02_%E6%97%A9%E5%AE%89%E9%98%B3%E5%85%89.gif?v=wechat_gif_1794823386', '早安阳光', '58.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/02_%E6%97%A9%E5%AE%89%E9%98%B3%E5%85%89.gif?v=wechat_gif_1794823386" download="02_早安阳光.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/02_%E6%97%A9%E5%AE%89%E9%98%B3%E5%85%89.gif?v=wechat_gif_1794823386" download="02_早安阳光.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="眼镜看书">
@@ -1652,7 +1766,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/03_%E7%9C%BC%E9%95%9C%E7%9C%8B%E4%B9%A6.gif?v=wechat_gif_1794823386', '眼镜看书', '57.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/03_%E7%9C%BC%E9%95%9C%E7%9C%8B%E4%B9%A6.gif?v=wechat_gif_1794823386" download="03_眼镜看书.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/03_%E7%9C%BC%E9%95%9C%E7%9C%8B%E4%B9%A6.gif?v=wechat_gif_1794823386" download="03_眼镜看书.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="委屈抽噎">
@@ -1674,7 +1788,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/04_%E5%A7%94%E5%B1%88%E6%8A%BD%E5%99%8E.gif?v=wechat_gif_1794823386', '委屈抽噎', '61.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/04_%E5%A7%94%E5%B1%88%E6%8A%BD%E5%99%8E.gif?v=wechat_gif_1794823386" download="04_委屈抽噎.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/04_%E5%A7%94%E5%B1%88%E6%8A%BD%E5%99%8E.gif?v=wechat_gif_1794823386" download="04_委屈抽噎.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="双手捧大爱心">
@@ -1696,7 +1810,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/05_%E5%8F%8C%E6%89%8B%E6%8D%A7%E5%A4%A7%E7%88%B1%E5%BF%83.gif?v=wechat_gif_1794823386', '双手捧大爱心', '60.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/05_%E5%8F%8C%E6%89%8B%E6%8D%A7%E5%A4%A7%E7%88%B1%E5%BF%83.gif?v=wechat_gif_1794823386" download="05_双手捧大爱心.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/05_%E5%8F%8C%E6%89%8B%E6%8D%A7%E5%A4%A7%E7%88%B1%E5%BF%83.gif?v=wechat_gif_1794823386" download="05_双手捧大爱心.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="猫耳耳机">
@@ -1718,7 +1832,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/06_%E7%8C%AB%E8%80%B3%E8%80%B3%E6%9C%BA.gif?v=wechat_gif_1794823386', '猫耳耳机', '59.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/06_%E7%8C%AB%E8%80%B3%E8%80%B3%E6%9C%BA.gif?v=wechat_gif_1794823386" download="06_猫耳耳机.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/06_%E7%8C%AB%E8%80%B3%E8%80%B3%E6%9C%BA.gif?v=wechat_gif_1794823386" download="06_猫耳耳机.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="围巾保暖">
@@ -1740,7 +1854,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/07_%E5%9B%B4%E5%B7%BE%E4%BF%9D%E6%9A%96.gif?v=wechat_gif_1794823386', '围巾保暖', '60.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/07_%E5%9B%B4%E5%B7%BE%E4%BF%9D%E6%9A%96.gif?v=wechat_gif_1794823386" download="07_围巾保暖.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/07_%E5%9B%B4%E5%B7%BE%E4%BF%9D%E6%9A%96.gif?v=wechat_gif_1794823386" download="07_围巾保暖.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃热泡面">
@@ -1762,7 +1876,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/08_%E5%90%83%E7%83%AD%E6%B3%A1%E9%9D%A2.gif?v=wechat_gif_1794823386', '吃热泡面', '58.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/08_%E5%90%83%E7%83%AD%E6%B3%A1%E9%9D%A2.gif?v=wechat_gif_1794823386" download="08_吃热泡面.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/08_%E5%90%83%E7%83%AD%E6%B3%A1%E9%9D%A2.gif?v=wechat_gif_1794823386" download="08_吃热泡面.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="抱猫猫晚安">
@@ -1784,7 +1898,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p18/09_%E6%8A%B1%E7%8C%AB%E7%8C%AB%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386', '抱猫猫晚安', '53.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p18/09_%E6%8A%B1%E7%8C%AB%E7%8C%AB%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="09_抱猫猫晚安.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p18/09_%E6%8A%B1%E7%8C%AB%E7%8C%AB%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="09_抱猫猫晚安.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -1818,7 +1932,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/01_%E5%85%94%E8%80%B3%E6%8B%9B%E6%89%8B.gif?v=wechat_gif_1794823386', '兔耳招手', '56.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/01_%E5%85%94%E8%80%B3%E6%8B%9B%E6%89%8B.gif?v=wechat_gif_1794823386" download="01_兔耳招手.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/01_%E5%85%94%E8%80%B3%E6%8B%9B%E6%89%8B.gif?v=wechat_gif_1794823386" download="01_兔耳招手.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="被窝晚安">
@@ -1840,7 +1954,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/02_%E8%A2%AB%E7%AA%9D%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386', '被窝晚安', '56.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/02_%E8%A2%AB%E7%AA%9D%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="02_被窝晚安.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/02_%E8%A2%AB%E7%AA%9D%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="02_被窝晚安.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="暖饮大笑">
@@ -1862,7 +1976,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/03_%E6%9A%96%E9%A5%AE%E5%A4%A7%E7%AC%91.gif?v=wechat_gif_1794823386', '暖饮大笑', '60.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/03_%E6%9A%96%E9%A5%AE%E5%A4%A7%E7%AC%91.gif?v=wechat_gif_1794823386" download="03_暖饮大笑.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/03_%E6%9A%96%E9%A5%AE%E5%A4%A7%E7%AC%91.gif?v=wechat_gif_1794823386" download="03_暖饮大笑.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="惊呆问号">
@@ -1884,7 +1998,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/04_%E6%83%8A%E5%91%86%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386', '惊呆问号', '60.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/04_%E6%83%8A%E5%91%86%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" download="04_惊呆问号.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/04_%E6%83%8A%E5%91%86%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" download="04_惊呆问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="蹭蹭猫咪">
@@ -1906,7 +2020,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/05_%E8%B9%AD%E8%B9%AD%E7%8C%AB%E5%92%AA.gif?v=wechat_gif_1794823386', '蹭蹭猫咪', '58.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/05_%E8%B9%AD%E8%B9%AD%E7%8C%AB%E5%92%AA.gif?v=wechat_gif_1794823386" download="05_蹭蹭猫咪.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/05_%E8%B9%AD%E8%B9%AD%E7%8C%AB%E5%92%AA.gif?v=wechat_gif_1794823386" download="05_蹭蹭猫咪.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="抱胸生气">
@@ -1928,7 +2042,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/06_%E6%8A%B1%E8%83%B8%E7%94%9F%E6%B0%94.gif?v=wechat_gif_1794823386', '抱胸生气', '58.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/06_%E6%8A%B1%E8%83%B8%E7%94%9F%E6%B0%94.gif?v=wechat_gif_1794823386" download="06_抱胸生气.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/06_%E6%8A%B1%E8%83%B8%E7%94%9F%E6%B0%94.gif?v=wechat_gif_1794823386" download="06_抱胸生气.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="泪崩大哭">
@@ -1950,7 +2064,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/07_%E6%B3%AA%E5%B4%A9%E5%A4%A7%E5%93%AD.gif?v=wechat_gif_1794823386', '泪崩大哭', '62.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/07_%E6%B3%AA%E5%B4%A9%E5%A4%A7%E5%93%AD.gif?v=wechat_gif_1794823386" download="07_泪崩大哭.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/07_%E6%B3%AA%E5%B4%A9%E5%A4%A7%E5%93%AD.gif?v=wechat_gif_1794823386" download="07_泪崩大哭.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃草莓蛋糕">
@@ -1972,7 +2086,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/08_%E5%90%83%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386', '吃草莓蛋糕', '60.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/08_%E5%90%83%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="08_吃草莓蛋糕.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/08_%E5%90%83%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="08_吃草莓蛋糕.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="飞吻爱你">
@@ -1994,7 +2108,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p17/09_%E9%A3%9E%E5%90%BB%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386', '飞吻爱你', '59.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p17/09_%E9%A3%9E%E5%90%BB%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386" download="09_飞吻爱你.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p17/09_%E9%A3%9E%E5%90%BB%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386" download="09_飞吻爱你.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -2028,7 +2142,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/01_%E8%80%B6%E6%AF%94%E6%89%8B%E5%8A%BF.gif?v=wechat_gif_1794823386', '耶比手势', '59.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/01_%E8%80%B6%E6%AF%94%E6%89%8B%E5%8A%BF.gif?v=wechat_gif_1794823386" download="01_耶比手势.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/01_%E8%80%B6%E6%AF%94%E6%89%8B%E5%8A%BF.gif?v=wechat_gif_1794823386" download="01_耶比手势.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="爱心抱抱">
@@ -2050,7 +2164,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/02_%E7%88%B1%E5%BF%83%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386', '爱心抱抱', '60.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/02_%E7%88%B1%E5%BF%83%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="02_爱心抱抱.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/02_%E7%88%B1%E5%BF%83%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="02_爱心抱抱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="探头偷看">
@@ -2072,7 +2186,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/03_%E6%8E%A2%E5%A4%B4%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386', '探头偷看', '55.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/03_%E6%8E%A2%E5%A4%B4%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386" download="03_探头偷看.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/03_%E6%8E%A2%E5%A4%B4%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386" download="03_探头偷看.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="抱抱枕头">
@@ -2094,7 +2208,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/04_%E6%8A%B1%E6%8A%B1%E6%9E%95%E5%A4%B4.gif?v=wechat_gif_1794823386', '抱抱枕头', '57.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/04_%E6%8A%B1%E6%8A%B1%E6%9E%95%E5%A4%B4.gif?v=wechat_gif_1794823386" download="04_抱抱枕头.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/04_%E6%8A%B1%E6%8A%B1%E6%9E%95%E5%A4%B4.gif?v=wechat_gif_1794823386" download="04_抱抱枕头.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="喝奶茶">
@@ -2116,7 +2230,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/05_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif?v=wechat_gif_1794823386', '喝奶茶', '60.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/05_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif?v=wechat_gif_1794823386" download="05_喝奶茶.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/05_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif?v=wechat_gif_1794823386" download="05_喝奶茶.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好棒">
@@ -2138,7 +2252,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/06_%E5%A5%BD%E6%A3%92.gif?v=wechat_gif_1794823386', '好棒', '61.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/06_%E5%A5%BD%E6%A3%92.gif?v=wechat_gif_1794823386" download="06_好棒.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/06_%E5%A5%BD%E6%A3%92.gif?v=wechat_gif_1794823386" download="06_好棒.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="呜呜哭泣">
@@ -2160,7 +2274,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/07_%E5%91%9C%E5%91%9C%E5%93%AD%E6%B3%A3.gif?v=wechat_gif_1794823386', '呜呜哭泣', '60.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/07_%E5%91%9C%E5%91%9C%E5%93%AD%E6%B3%A3.gif?v=wechat_gif_1794823386" download="07_呜呜哭泣.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/07_%E5%91%9C%E5%91%9C%E5%93%AD%E6%B3%A3.gif?v=wechat_gif_1794823386" download="07_呜呜哭泣.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="呆萌问号">
@@ -2182,7 +2296,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/08_%E5%91%86%E8%90%8C%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386', '呆萌问号', '57.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/08_%E5%91%86%E8%90%8C%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" download="08_呆萌问号.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/08_%E5%91%86%E8%90%8C%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" download="08_呆萌问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="加油敲电脑">
@@ -2204,7 +2318,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p16/09_%E5%8A%A0%E6%B2%B9%E6%95%B2%E7%94%B5%E8%84%91.gif?v=wechat_gif_1794823386', '加油敲电脑', '52.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p16/09_%E5%8A%A0%E6%B2%B9%E6%95%B2%E7%94%B5%E8%84%91.gif?v=wechat_gif_1794823386" download="09_加油敲电脑.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p16/09_%E5%8A%A0%E6%B2%B9%E6%95%B2%E7%94%B5%E8%84%91.gif?v=wechat_gif_1794823386" download="09_加油敲电脑.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -2238,7 +2352,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/01_%E5%9C%A8%E5%90%97.gif?v=wechat_gif_1794823386', '在吗', '63.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/01_%E5%9C%A8%E5%90%97.gif?v=wechat_gif_1794823386" download="01_在吗.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/01_%E5%9C%A8%E5%90%97.gif?v=wechat_gif_1794823386" download="01_在吗.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="说吧">
@@ -2260,7 +2374,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/02_%E8%AF%B4%E5%90%A7.gif?v=wechat_gif_1794823386', '说吧', '63.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/02_%E8%AF%B4%E5%90%A7.gif?v=wechat_gif_1794823386" download="02_说吧.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/02_%E8%AF%B4%E5%90%A7.gif?v=wechat_gif_1794823386" download="02_说吧.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="OK没问题">
@@ -2282,7 +2396,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/03_OK%E6%B2%A1%E9%97%AE%E9%A2%98.gif?v=wechat_gif_1794823386', 'OK没问题', '62.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/03_OK%E6%B2%A1%E9%97%AE%E9%A2%98.gif?v=wechat_gif_1794823386" download="03_OK没问题.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/03_OK%E6%B2%A1%E9%97%AE%E9%A2%98.gif?v=wechat_gif_1794823386" download="03_OK没问题.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="偷看">
@@ -2304,7 +2418,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/04_%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386', '偷看', '55.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/04_%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386" download="04_偷看.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/04_%E5%81%B7%E7%9C%8B.gif?v=wechat_gif_1794823386" download="04_偷看.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="求求你">
@@ -2326,7 +2440,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/05_%E6%B1%82%E6%B1%82%E4%BD%A0.gif?v=wechat_gif_1794823386', '求求你', '63.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/05_%E6%B1%82%E6%B1%82%E4%BD%A0.gif?v=wechat_gif_1794823386" download="05_求求你.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/05_%E6%B1%82%E6%B1%82%E4%BD%A0.gif?v=wechat_gif_1794823386" download="05_求求你.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="尴尬扶额">
@@ -2348,7 +2462,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/06_%E5%B0%B4%E5%B0%AC%E6%89%B6%E9%A2%9D.gif?v=wechat_gif_1794823386', '尴尬扶额', '67.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/06_%E5%B0%B4%E5%B0%AC%E6%89%B6%E9%A2%9D.gif?v=wechat_gif_1794823386" download="06_尴尬扶额.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/06_%E5%B0%B4%E5%B0%AC%E6%89%B6%E9%A2%9D.gif?v=wechat_gif_1794823386" download="06_尴尬扶额.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="等你消息">
@@ -2370,7 +2484,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/07_%E7%AD%89%E4%BD%A0%E6%B6%88%E6%81%AF.gif?v=wechat_gif_1794823386', '等你消息', '72.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/07_%E7%AD%89%E4%BD%A0%E6%B6%88%E6%81%AF.gif?v=wechat_gif_1794823386" download="07_等你消息.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/07_%E7%AD%89%E4%BD%A0%E6%B6%88%E6%81%AF.gif?v=wechat_gif_1794823386" download="07_等你消息.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="大口吃瓜">
@@ -2392,7 +2506,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/08_%E5%A4%A7%E5%8F%A3%E5%90%83%E7%93%9C.gif?v=wechat_gif_1794823386', '大口吃瓜', '67.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/08_%E5%A4%A7%E5%8F%A3%E5%90%83%E7%93%9C.gif?v=wechat_gif_1794823386" download="08_大口吃瓜.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/08_%E5%A4%A7%E5%8F%A3%E5%90%83%E7%93%9C.gif?v=wechat_gif_1794823386" download="08_大口吃瓜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="安排到位">
@@ -2414,7 +2528,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p15/09_%E5%AE%89%E6%8E%92%E5%88%B0%E4%BD%8D.gif?v=wechat_gif_1794823386', '安排到位', '70.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p15/09_%E5%AE%89%E6%8E%92%E5%88%B0%E4%BD%8D.gif?v=wechat_gif_1794823386" download="09_安排到位.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p15/09_%E5%AE%89%E6%8E%92%E5%88%B0%E4%BD%8D.gif?v=wechat_gif_1794823386" download="09_安排到位.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -2448,7 +2562,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386', '好冷', '62.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386" download="01_好冷.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386" download="01_好冷.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="难受">
@@ -2470,7 +2584,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/02_%E9%9A%BE%E5%8F%97.gif?v=wechat_gif_1794823386', '难受', '56.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/02_%E9%9A%BE%E5%8F%97.gif?v=wechat_gif_1794823386" download="02_难受.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/02_%E9%9A%BE%E5%8F%97.gif?v=wechat_gif_1794823386" download="02_难受.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="晚安">
@@ -2492,7 +2606,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/03_%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386', '晚安', '60.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/03_%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="03_晚安.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/03_%E6%99%9A%E5%AE%89.gif?v=wechat_gif_1794823386" download="03_晚安.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="救命抓头">
@@ -2514,7 +2628,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/04_%E6%95%91%E5%91%BD%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386', '救命抓头', '64.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/04_%E6%95%91%E5%91%BD%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386" download="04_救命抓头.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/04_%E6%95%91%E5%91%BD%E6%8A%93%E5%A4%B4.gif?v=wechat_gif_1794823386" download="04_救命抓头.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吹泡泡">
@@ -2536,7 +2650,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/05_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386', '吹泡泡', '64.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/05_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386" download="05_吹泡泡.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/05_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386" download="05_吹泡泡.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="多喝水">
@@ -2558,7 +2672,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/06_%E5%A4%9A%E5%96%9D%E6%B0%B4.gif?v=wechat_gif_1794823386', '多喝水', '62.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/06_%E5%A4%9A%E5%96%9D%E6%B0%B4.gif?v=wechat_gif_1794823386" download="06_多喝水.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/06_%E5%A4%9A%E5%96%9D%E6%B0%B4.gif?v=wechat_gif_1794823386" download="06_多喝水.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="暖暖休息">
@@ -2580,7 +2694,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/07_%E6%9A%96%E6%9A%96%E4%BC%91%E6%81%AF.gif?v=wechat_gif_1794823386', '暖暖休息', '66.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/07_%E6%9A%96%E6%9A%96%E4%BC%91%E6%81%AF.gif?v=wechat_gif_1794823386" download="07_暖暖休息.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/07_%E6%9A%96%E6%9A%96%E4%BC%91%E6%81%AF.gif?v=wechat_gif_1794823386" download="07_暖暖休息.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="早安伸懒腰">
@@ -2602,7 +2716,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/08_%E6%97%A9%E5%AE%89%E4%BC%B8%E6%87%92%E8%85%B0.gif?v=wechat_gif_1794823386', '早安伸懒腰', '64.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/08_%E6%97%A9%E5%AE%89%E4%BC%B8%E6%87%92%E8%85%B0.gif?v=wechat_gif_1794823386" download="08_早安伸懒腰.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/08_%E6%97%A9%E5%AE%89%E4%BC%B8%E6%87%92%E8%85%B0.gif?v=wechat_gif_1794823386" download="08_早安伸懒腰.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="托腮发呆">
@@ -2624,7 +2738,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p14/09_%E6%89%98%E8%85%AE%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386', '托腮发呆', '70.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p14/09_%E6%89%98%E8%85%AE%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386" download="09_托腮发呆.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p14/09_%E6%89%98%E8%85%AE%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386" download="09_托腮发呆.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -2658,7 +2772,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/01_%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386', '爱你', '67.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/01_%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386" download="01_爱你.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/01_%E7%88%B1%E4%BD%A0.gif?v=wechat_gif_1794823386" download="01_爱你.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="啵">
@@ -2680,7 +2794,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/02_%E5%95%B5.gif?v=wechat_gif_1794823386', '啵', '63.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/02_%E5%95%B5.gif?v=wechat_gif_1794823386" download="02_啵.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/02_%E5%95%B5.gif?v=wechat_gif_1794823386" download="02_啵.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="抱抱">
@@ -2702,7 +2816,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/03_%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386', '抱抱', '62.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/03_%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="03_抱抱.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/03_%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="03_抱抱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="害羞">
@@ -2724,7 +2838,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/04_%E5%AE%B3%E7%BE%9E.gif?v=wechat_gif_1794823386', '害羞', '62.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/04_%E5%AE%B3%E7%BE%9E.gif?v=wechat_gif_1794823386" download="04_害羞.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/04_%E5%AE%B3%E7%BE%9E.gif?v=wechat_gif_1794823386" download="04_害羞.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="喜欢">
@@ -2746,7 +2860,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/05_%E5%96%9C%E6%AC%A2.gif?v=wechat_gif_1794823386', '喜欢', '65.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/05_%E5%96%9C%E6%AC%A2.gif?v=wechat_gif_1794823386" download="05_喜欢.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/05_%E5%96%9C%E6%AC%A2.gif?v=wechat_gif_1794823386" download="05_喜欢.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="送你礼物">
@@ -2768,7 +2882,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/06_%E9%80%81%E4%BD%A0%E7%A4%BC%E7%89%A9.gif?v=wechat_gif_1794823386', '送你礼物', '65.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/06_%E9%80%81%E4%BD%A0%E7%A4%BC%E7%89%A9.gif?v=wechat_gif_1794823386" download="06_送你礼物.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/06_%E9%80%81%E4%BD%A0%E7%A4%BC%E7%89%A9.gif?v=wechat_gif_1794823386" download="06_送你礼物.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="给你鲜花">
@@ -2790,7 +2904,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/07_%E7%BB%99%E4%BD%A0%E9%B2%9C%E8%8A%B1.gif?v=wechat_gif_1794823386', '给你鲜花', '71.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/07_%E7%BB%99%E4%BD%A0%E9%B2%9C%E8%8A%B1.gif?v=wechat_gif_1794823386" download="07_给你鲜花.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/07_%E7%BB%99%E4%BD%A0%E9%B2%9C%E8%8A%B1.gif?v=wechat_gif_1794823386" download="07_给你鲜花.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="飞扑抱抱">
@@ -2812,7 +2926,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/08_%E9%A3%9E%E6%89%91%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386', '飞扑抱抱', '67.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/08_%E9%A3%9E%E6%89%91%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="08_飞扑抱抱.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/08_%E9%A3%9E%E6%89%91%E6%8A%B1%E6%8A%B1.gif?v=wechat_gif_1794823386" download="08_飞扑抱抱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="想你">
@@ -2834,7 +2948,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p13/09_%E6%83%B3%E4%BD%A0.gif?v=wechat_gif_1794823386', '想你', '66.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p13/09_%E6%83%B3%E4%BD%A0.gif?v=wechat_gif_1794823386" download="09_想你.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p13/09_%E6%83%B3%E4%BD%A0.gif?v=wechat_gif_1794823386" download="09_想你.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -2868,7 +2982,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/01_%E5%AD%A6%E4%B9%A0.gif?v=wechat_gif_1794823386', '学习', '61.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/01_%E5%AD%A6%E4%B9%A0.gif?v=wechat_gif_1794823386" download="01_学习.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/01_%E5%AD%A6%E4%B9%A0.gif?v=wechat_gif_1794823386" download="01_学习.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="认真">
@@ -2890,7 +3004,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/02_%E8%AE%A4%E7%9C%9F.gif?v=wechat_gif_1794823386', '认真', '63.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/02_%E8%AE%A4%E7%9C%9F.gif?v=wechat_gif_1794823386" download="02_认真.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/02_%E8%AE%A4%E7%9C%9F.gif?v=wechat_gif_1794823386" download="02_认真.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="赶稿">
@@ -2912,7 +3026,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/03_%E8%B5%B6%E7%A8%BF.gif?v=wechat_gif_1794823386', '赶稿', '66.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/03_%E8%B5%B6%E7%A8%BF.gif?v=wechat_gif_1794823386" download="03_赶稿.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/03_%E8%B5%B6%E7%A8%BF.gif?v=wechat_gif_1794823386" download="03_赶稿.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="思考">
@@ -2934,7 +3048,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/04_%E6%80%9D%E8%80%83.gif?v=wechat_gif_1794823386', '思考', '66.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/04_%E6%80%9D%E8%80%83.gif?v=wechat_gif_1794823386" download="04_思考.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/04_%E6%80%9D%E8%80%83.gif?v=wechat_gif_1794823386" download="04_思考.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="困困">
@@ -2956,7 +3070,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/05_%E5%9B%B0%E5%9B%B0.gif?v=wechat_gif_1794823386', '困困', '62.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/05_%E5%9B%B0%E5%9B%B0.gif?v=wechat_gif_1794823386" download="05_困困.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/05_%E5%9B%B0%E5%9B%B0.gif?v=wechat_gif_1794823386" download="05_困困.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="完成">
@@ -2978,7 +3092,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/06_%E5%AE%8C%E6%88%90.gif?v=wechat_gif_1794823386', '完成', '65.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/06_%E5%AE%8C%E6%88%90.gif?v=wechat_gif_1794823386" download="06_完成.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/06_%E5%AE%8C%E6%88%90.gif?v=wechat_gif_1794823386" download="06_完成.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="收到">
@@ -3000,7 +3114,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/07_%E6%94%B6%E5%88%B0.gif?v=wechat_gif_1794823386', '收到', '67.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/07_%E6%94%B6%E5%88%B0.gif?v=wechat_gif_1794823386" download="07_收到.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/07_%E6%94%B6%E5%88%B0.gif?v=wechat_gif_1794823386" download="07_收到.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="摸鱼">
@@ -3022,7 +3136,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/08_%E6%91%B8%E9%B1%BC.gif?v=wechat_gif_1794823386', '摸鱼', '64.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/08_%E6%91%B8%E9%B1%BC.gif?v=wechat_gif_1794823386" download="08_摸鱼.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/08_%E6%91%B8%E9%B1%BC.gif?v=wechat_gif_1794823386" download="08_摸鱼.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="下班">
@@ -3044,7 +3158,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p12/09_%E4%B8%8B%E7%8F%AD.gif?v=wechat_gif_1794823386', '下班', '64.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p12/09_%E4%B8%8B%E7%8F%AD.gif?v=wechat_gif_1794823386" download="09_下班.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p12/09_%E4%B8%8B%E7%8F%AD.gif?v=wechat_gif_1794823386" download="09_下班.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -3078,7 +3192,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/01_%E5%88%B7%E6%B2%B9%E6%BC%86.gif?v=wechat_gif_1794823386', '刷油漆', '51.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/01_%E5%88%B7%E6%B2%B9%E6%BC%86.gif?v=wechat_gif_1794823386" download="01_刷油漆.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/01_%E5%88%B7%E6%B2%B9%E6%BC%86.gif?v=wechat_gif_1794823386" download="01_刷油漆.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="巧克力蛋糕">
@@ -3100,7 +3214,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/02_%E5%B7%A7%E5%85%8B%E5%8A%9B%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386', '巧克力蛋糕', '46.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/02_%E5%B7%A7%E5%85%8B%E5%8A%9B%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="02_巧克力蛋糕.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/02_%E5%B7%A7%E5%85%8B%E5%8A%9B%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="02_巧克力蛋糕.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="欢呼星星">
@@ -3122,7 +3236,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/03_%E6%AC%A2%E5%91%BC%E6%98%9F%E6%98%9F.gif?v=wechat_gif_1794823386', '欢呼星星', '48.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/03_%E6%AC%A2%E5%91%BC%E6%98%9F%E6%98%9F.gif?v=wechat_gif_1794823386" download="03_欢呼星星.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/03_%E6%AC%A2%E5%91%BC%E6%98%9F%E6%98%9F.gif?v=wechat_gif_1794823386" download="03_欢呼星星.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="捏泡泡纸">
@@ -3144,7 +3258,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/04_%E6%8D%8F%E6%B3%A1%E6%B3%A1%E7%BA%B8.gif?v=wechat_gif_1794823386', '捏泡泡纸', '50.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/04_%E6%8D%8F%E6%B3%A1%E6%B3%A1%E7%BA%B8.gif?v=wechat_gif_1794823386" download="04_捏泡泡纸.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/04_%E6%8D%8F%E6%B3%A1%E6%B3%A1%E7%BA%B8.gif?v=wechat_gif_1794823386" download="04_捏泡泡纸.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="小侦探">
@@ -3166,7 +3280,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/05_%E5%B0%8F%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386', '小侦探', '43.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/05_%E5%B0%8F%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386" download="05_小侦探.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/05_%E5%B0%8F%E4%BE%A6%E6%8E%A2.gif?v=wechat_gif_1794823386" download="05_小侦探.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="织毛衣">
@@ -3188,7 +3302,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/06_%E7%BB%87%E6%AF%9B%E8%A1%A3.gif?v=wechat_gif_1794823386', '织毛衣', '51.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/06_%E7%BB%87%E6%AF%9B%E8%A1%A3.gif?v=wechat_gif_1794823386" download="06_织毛衣.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/06_%E7%BB%87%E6%AF%9B%E8%A1%A3.gif?v=wechat_gif_1794823386" download="06_织毛衣.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="游泳圈">
@@ -3210,7 +3324,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/07_%E6%B8%B8%E6%B3%B3%E5%9C%88.gif?v=wechat_gif_1794823386', '游泳圈', '47.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/07_%E6%B8%B8%E6%B3%B3%E5%9C%88.gif?v=wechat_gif_1794823386" download="07_游泳圈.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/07_%E6%B8%B8%E6%B3%B3%E5%9C%88.gif?v=wechat_gif_1794823386" download="07_游泳圈.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="煎饼厨娘">
@@ -3232,7 +3346,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/08_%E7%85%8E%E9%A5%BC%E5%8E%A8%E5%A8%98.gif?v=wechat_gif_1794823386', '煎饼厨娘', '50.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/08_%E7%85%8E%E9%A5%BC%E5%8E%A8%E5%A8%98.gif?v=wechat_gif_1794823386" download="08_煎饼厨娘.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/08_%E7%85%8E%E9%A5%BC%E5%8E%A8%E5%A8%98.gif?v=wechat_gif_1794823386" download="08_煎饼厨娘.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="抱小白猫">
@@ -3254,7 +3368,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p11/09_%E6%8A%B1%E5%B0%8F%E7%99%BD%E7%8C%AB.gif?v=wechat_gif_1794823386', '抱小白猫', '46.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p11/09_%E6%8A%B1%E5%B0%8F%E7%99%BD%E7%8C%AB.gif?v=wechat_gif_1794823386" download="09_抱小白猫.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p11/09_%E6%8A%B1%E5%B0%8F%E7%99%BD%E7%8C%AB.gif?v=wechat_gif_1794823386" download="09_抱小白猫.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -3288,7 +3402,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/01_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif?v=wechat_gif_1794823386', '吃爆米花', '51.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/01_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif?v=wechat_gif_1794823386" download="01_吃爆米花.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/01_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif?v=wechat_gif_1794823386" download="01_吃爆米花.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好冷发抖">
@@ -3310,7 +3424,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/02_%E5%A5%BD%E5%86%B7%E5%8F%91%E6%8A%96.gif?v=wechat_gif_1794823386', '好冷发抖', '50.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/02_%E5%A5%BD%E5%86%B7%E5%8F%91%E6%8A%96.gif?v=wechat_gif_1794823386" download="02_好冷发抖.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/02_%E5%A5%BD%E5%86%B7%E5%8F%91%E6%8A%96.gif?v=wechat_gif_1794823386" download="02_好冷发抖.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="草莓蛋糕">
@@ -3332,7 +3446,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/03_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386', '草莓蛋糕', '54.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/03_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="03_草莓蛋糕.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/03_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif?v=wechat_gif_1794823386" download="03_草莓蛋糕.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="照镜子">
@@ -3354,7 +3468,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/04_%E7%85%A7%E9%95%9C%E5%AD%90.gif?v=wechat_gif_1794823386', '照镜子', '54.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/04_%E7%85%A7%E9%95%9C%E5%AD%90.gif?v=wechat_gif_1794823386" download="04_照镜子.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/04_%E7%85%A7%E9%95%9C%E5%AD%90.gif?v=wechat_gif_1794823386" download="04_照镜子.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="大曲奇">
@@ -3376,7 +3490,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/05_%E5%A4%A7%E6%9B%B2%E5%A5%87.gif?v=wechat_gif_1794823386', '大曲奇', '51.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/05_%E5%A4%A7%E6%9B%B2%E5%A5%87.gif?v=wechat_gif_1794823386" download="05_大曲奇.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/05_%E5%A4%A7%E6%9B%B2%E5%A5%87.gif?v=wechat_gif_1794823386" download="05_大曲奇.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="放大镜">
@@ -3398,7 +3512,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/06_%E6%94%BE%E5%A4%A7%E9%95%9C.gif?v=wechat_gif_1794823386', '放大镜', '54.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/06_%E6%94%BE%E5%A4%A7%E9%95%9C.gif?v=wechat_gif_1794823386" download="06_放大镜.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/06_%E6%94%BE%E5%A4%A7%E9%95%9C.gif?v=wechat_gif_1794823386" download="06_放大镜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="发烧感冒">
@@ -3420,7 +3534,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/07_%E5%8F%91%E7%83%A7%E6%84%9F%E5%86%92.gif?v=wechat_gif_1794823386', '发烧感冒', '44.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/07_%E5%8F%91%E7%83%A7%E6%84%9F%E5%86%92.gif?v=wechat_gif_1794823386" download="07_发烧感冒.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/07_%E5%8F%91%E7%83%A7%E6%84%9F%E5%86%92.gif?v=wechat_gif_1794823386" download="07_发烧感冒.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吹泡泡">
@@ -3442,7 +3556,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/08_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386', '吹泡泡', '53.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/08_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386" download="08_吹泡泡.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/08_%E5%90%B9%E6%B3%A1%E6%B3%A1.gif?v=wechat_gif_1794823386" download="08_吹泡泡.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="发呆听歌">
@@ -3464,7 +3578,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p10/09_%E5%8F%91%E5%91%86%E5%90%AC%E6%AD%8C.gif?v=wechat_gif_1794823386', '发呆听歌', '48.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p10/09_%E5%8F%91%E5%91%86%E5%90%AC%E6%AD%8C.gif?v=wechat_gif_1794823386" download="09_发呆听歌.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p10/09_%E5%8F%91%E5%91%86%E5%90%AC%E6%AD%8C.gif?v=wechat_gif_1794823386" download="09_发呆听歌.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -3498,7 +3612,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386', '好冷', '52.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386" download="01_好冷.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/01_%E5%A5%BD%E5%86%B7.gif?v=wechat_gif_1794823386" download="01_好冷.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吨吨吨">
@@ -3520,7 +3634,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/02_%E5%90%A8%E5%90%A8%E5%90%A8.gif?v=wechat_gif_1794823386', '吨吨吨', '44.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/02_%E5%90%A8%E5%90%A8%E5%90%A8.gif?v=wechat_gif_1794823386" download="02_吨吨吨.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/02_%E5%90%A8%E5%90%A8%E5%90%A8.gif?v=wechat_gif_1794823386" download="02_吨吨吨.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="心动">
@@ -3542,7 +3656,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/03_%E5%BF%83%E5%8A%A8.gif?v=wechat_gif_1794823386', '心动', '42.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/03_%E5%BF%83%E5%8A%A8.gif?v=wechat_gif_1794823386" download="03_心动.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/03_%E5%BF%83%E5%8A%A8.gif?v=wechat_gif_1794823386" download="03_心动.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="熬夜">
@@ -3564,7 +3678,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/04_%E7%86%AC%E5%A4%9C.gif?v=wechat_gif_1794823386', '熬夜', '43.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/04_%E7%86%AC%E5%A4%9C.gif?v=wechat_gif_1794823386" download="04_熬夜.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/04_%E7%86%AC%E5%A4%9C.gif?v=wechat_gif_1794823386" download="04_熬夜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃惊">
@@ -3586,7 +3700,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/05_%E5%90%83%E6%83%8A.gif?v=wechat_gif_1794823386', '吃惊', '45.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/05_%E5%90%83%E6%83%8A.gif?v=wechat_gif_1794823386" download="05_吃惊.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/05_%E5%90%83%E6%83%8A.gif?v=wechat_gif_1794823386" download="05_吃惊.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="想要">
@@ -3608,7 +3722,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/06_%E6%83%B3%E8%A6%81.gif?v=wechat_gif_1794823386', '想要', '43.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/06_%E6%83%B3%E8%A6%81.gif?v=wechat_gif_1794823386" download="06_想要.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/06_%E6%83%B3%E8%A6%81.gif?v=wechat_gif_1794823386" download="06_想要.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="点赞">
@@ -3630,7 +3744,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/07_%E7%82%B9%E8%B5%9E.gif?v=wechat_gif_1794823386', '点赞', '48.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/07_%E7%82%B9%E8%B5%9E.gif?v=wechat_gif_1794823386" download="07_点赞.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/07_%E7%82%B9%E8%B5%9E.gif?v=wechat_gif_1794823386" download="07_点赞.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="发呆">
@@ -3652,7 +3766,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/08_%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386', '发呆', '41.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/08_%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386" download="08_发呆.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/08_%E5%8F%91%E5%91%86.gif?v=wechat_gif_1794823386" download="08_发呆.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="运动">
@@ -3674,7 +3788,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p9/09_%E8%BF%90%E5%8A%A8.gif?v=wechat_gif_1794823386', '运动', '40.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p9/09_%E8%BF%90%E5%8A%A8.gif?v=wechat_gif_1794823386" download="09_运动.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p9/09_%E8%BF%90%E5%8A%A8.gif?v=wechat_gif_1794823386" download="09_运动.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -3708,7 +3822,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/01_%E5%97%A8.gif', '嗨', '32.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/01_%E5%97%A8.gif" download="01_嗨.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/01_%E5%97%A8.gif" download="01_嗨.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好耶">
@@ -3730,7 +3844,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/02_%E5%A5%BD%E8%80%B6.gif', '好耶', '30.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/02_%E5%A5%BD%E8%80%B6.gif" download="02_好耶.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/02_%E5%A5%BD%E8%80%B6.gif" download="02_好耶.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="嘿嘿">
@@ -3752,7 +3866,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/03_%E5%98%BF%E5%98%BF.gif', '嘿嘿', '29.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/03_%E5%98%BF%E5%98%BF.gif" download="03_嘿嘿.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/03_%E5%98%BF%E5%98%BF.gif" download="03_嘿嘿.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="无语">
@@ -3774,7 +3888,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/04_%E6%97%A0%E8%AF%AD.gif', '无语', '29.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/04_%E6%97%A0%E8%AF%AD.gif" download="04_无语.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/04_%E6%97%A0%E8%AF%AD.gif" download="04_无语.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="震惊">
@@ -3796,7 +3910,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/05_%E9%9C%87%E6%83%8A.gif', '震惊', '34.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/05_%E9%9C%87%E6%83%8A.gif" download="05_震惊.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/05_%E9%9C%87%E6%83%8A.gif" download="05_震惊.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="哼">
@@ -3818,7 +3932,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/06_%E5%93%BC.gif', '哼', '28.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/06_%E5%93%BC.gif" download="06_哼.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/06_%E5%93%BC.gif" download="06_哼.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="委屈">
@@ -3840,7 +3954,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/07_%E5%A7%94%E5%B1%88.gif', '委屈', '31.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/07_%E5%A7%94%E5%B1%88.gif" download="07_委屈.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/07_%E5%A7%94%E5%B1%88.gif" download="07_委屈.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="困">
@@ -3862,7 +3976,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/08_%E5%9B%B0.gif', '困', '31.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/08_%E5%9B%B0.gif" download="08_困.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/08_%E5%9B%B0.gif" download="08_困.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="疑问">
@@ -3884,7 +3998,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p8/09_%E7%96%91%E9%97%AE.gif', '疑问', '31.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p8/09_%E7%96%91%E9%97%AE.gif" download="09_疑问.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p8/09_%E7%96%91%E9%97%AE.gif" download="09_疑问.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -3918,7 +4032,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/01_%E6%8A%B1%E6%8A%B1%E5%B0%8F%E5%85%94.gif', '抱抱小兔', '29.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/01_%E6%8A%B1%E6%8A%B1%E5%B0%8F%E5%85%94.gif" download="01_抱抱小兔.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/01_%E6%8A%B1%E6%8A%B1%E5%B0%8F%E5%85%94.gif" download="01_抱抱小兔.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="比心">
@@ -3940,7 +4054,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/02_%E6%AF%94%E5%BF%83.gif', '比心', '31.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/02_%E6%AF%94%E5%BF%83.gif" download="02_比心.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/02_%E6%AF%94%E5%BF%83.gif" download="02_比心.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="听音乐">
@@ -3962,7 +4076,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/03_%E5%90%AC%E9%9F%B3%E4%B9%90.gif', '听音乐', '30.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/03_%E5%90%AC%E9%9F%B3%E4%B9%90.gif" download="03_听音乐.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/03_%E5%90%AC%E9%9F%B3%E4%B9%90.gif" download="03_听音乐.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="认真上网">
@@ -3984,7 +4098,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/04_%E8%AE%A4%E7%9C%9F%E4%B8%8A%E7%BD%91.gif', '认真上网', '29.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/04_%E8%AE%A4%E7%9C%9F%E4%B8%8A%E7%BD%91.gif" download="04_认真上网.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/04_%E8%AE%A4%E7%9C%9F%E4%B8%8A%E7%BD%91.gif" download="04_认真上网.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="暖暖热饮">
@@ -4006,7 +4120,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/05_%E6%9A%96%E6%9A%96%E7%83%AD%E9%A5%AE.gif', '暖暖热饮', '31.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/05_%E6%9A%96%E6%9A%96%E7%83%AD%E9%A5%AE.gif" download="05_暖暖热饮.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/05_%E6%9A%96%E6%9A%96%E7%83%AD%E9%A5%AE.gif" download="05_暖暖热饮.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="气鼓鼓">
@@ -4028,7 +4142,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/06_%E6%B0%94%E9%BC%93%E9%BC%93.gif', '气鼓鼓', '31.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/06_%E6%B0%94%E9%BC%93%E9%BC%93.gif" download="06_气鼓鼓.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/06_%E6%B0%94%E9%BC%93%E9%BC%93.gif" download="06_气鼓鼓.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="小熊睡衣">
@@ -4050,7 +4164,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/07_%E5%B0%8F%E7%86%8A%E7%9D%A1%E8%A1%A3.gif', '小熊睡衣', '32.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/07_%E5%B0%8F%E7%86%8A%E7%9D%A1%E8%A1%A3.gif" download="07_小熊睡衣.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/07_%E5%B0%8F%E7%86%8A%E7%9D%A1%E8%A1%A3.gif" download="07_小熊睡衣.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="晚安好梦">
@@ -4072,7 +4186,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/08_%E6%99%9A%E5%AE%89%E5%A5%BD%E6%A2%A6.gif', '晚安好梦', '31.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/08_%E6%99%9A%E5%AE%89%E5%A5%BD%E6%A2%A6.gif" download="08_晚安好梦.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/08_%E6%99%9A%E5%AE%89%E5%A5%BD%E6%A2%A6.gif" download="08_晚安好梦.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="生日快乐">
@@ -4094,7 +4208,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p7/09_%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90.gif', '生日快乐', '37.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p7/09_%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90.gif" download="09_生日快乐.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p7/09_%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90.gif" download="09_生日快乐.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -4128,7 +4242,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/01_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif', '喝奶茶', '31.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/01_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif" download="01_喝奶茶.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/01_%E5%96%9D%E5%A5%B6%E8%8C%B6.gif" download="01_喝奶茶.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="草莓蛋糕">
@@ -4150,7 +4264,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/02_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif', '草莓蛋糕', '34.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/02_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif" download="02_草莓蛋糕.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/02_%E8%8D%89%E8%8E%93%E8%9B%8B%E7%B3%95.gif" download="02_草莓蛋糕.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃曲奇">
@@ -4172,7 +4286,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/03_%E5%90%83%E6%9B%B2%E5%A5%87.gif', '吃曲奇', '31.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/03_%E5%90%83%E6%9B%B2%E5%A5%87.gif" download="03_吃曲奇.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/03_%E5%90%83%E6%9B%B2%E5%A5%87.gif" download="03_吃曲奇.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃西瓜">
@@ -4194,7 +4308,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/04_%E5%90%83%E8%A5%BF%E7%93%9C.gif', '吃西瓜', '31.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/04_%E5%90%83%E8%A5%BF%E7%93%9C.gif" download="04_吃西瓜.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/04_%E5%90%83%E8%A5%BF%E7%93%9C.gif" download="04_吃西瓜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃爆米花">
@@ -4216,7 +4330,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/05_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif', '吃爆米花', '33.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/05_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif" download="05_吃爆米花.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/05_%E5%90%83%E7%88%86%E7%B1%B3%E8%8A%B1.gif" download="05_吃爆米花.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃冰淇淋">
@@ -4238,7 +4352,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/06_%E5%90%83%E5%86%B0%E6%B7%87%E6%B7%8B.gif', '吃冰淇淋', '31.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/06_%E5%90%83%E5%86%B0%E6%B7%87%E6%B7%8B.gif" download="06_吃冰淇淋.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/06_%E5%90%83%E5%86%B0%E6%B7%87%E6%B7%8B.gif" download="06_吃冰淇淋.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="布丁圣代">
@@ -4260,7 +4374,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/07_%E5%B8%83%E4%B8%81%E5%9C%A3%E4%BB%A3.gif', '布丁圣代', '35.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/07_%E5%B8%83%E4%B8%81%E5%9C%A3%E4%BB%A3.gif" download="07_布丁圣代.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/07_%E5%B8%83%E4%B8%81%E5%9C%A3%E4%BB%A3.gif" download="07_布丁圣代.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃可颂">
@@ -4282,7 +4396,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/08_%E5%90%83%E5%8F%AF%E9%A2%82.gif', '吃可颂', '31.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/08_%E5%90%83%E5%8F%AF%E9%A2%82.gif" download="08_吃可颂.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/08_%E5%90%83%E5%8F%AF%E9%A2%82.gif" download="08_吃可颂.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="想吃汉堡">
@@ -4304,7 +4418,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p6/09_%E6%83%B3%E5%90%83%E6%B1%89%E5%A0%A1.gif', '想吃汉堡', '35.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p6/09_%E6%83%B3%E5%90%83%E6%B1%89%E5%A0%A1.gif" download="09_想吃汉堡.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p6/09_%E6%83%B3%E5%90%83%E6%B1%89%E5%A0%A1.gif" download="09_想吃汉堡.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -4338,7 +4452,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/01_%E6%8B%9C%E6%8B%9C%E5%95%A6.gif', '拜拜啦', '77.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/01_%E6%8B%9C%E6%8B%9C%E5%95%A6.gif" download="01_拜拜啦.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/01_%E6%8B%9C%E6%8B%9C%E5%95%A6.gif" download="01_拜拜啦.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="原来如此">
@@ -4360,7 +4474,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/02_%E5%8E%9F%E6%9D%A5%E5%A6%82%E6%AD%A4.gif', '原来如此', '74.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/02_%E5%8E%9F%E6%9D%A5%E5%A6%82%E6%AD%A4.gif" download="02_原来如此.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/02_%E5%8E%9F%E6%9D%A5%E5%A6%82%E6%AD%A4.gif" download="02_原来如此.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="达退退">
@@ -4382,7 +4496,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/03_%E8%BE%BE%E9%80%80%E9%80%80.gif', '达退退', '74.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/03_%E8%BE%BE%E9%80%80%E9%80%80.gif" download="03_达退退.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/03_%E8%BE%BE%E9%80%80%E9%80%80.gif" download="03_达退退.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="太棒了">
@@ -4404,7 +4518,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/04_%E5%A4%AA%E6%A3%92%E4%BA%86.gif', '太棒了', '77.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/04_%E5%A4%AA%E6%A3%92%E4%BA%86.gif" download="04_太棒了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/04_%E5%A4%AA%E6%A3%92%E4%BA%86.gif" download="04_太棒了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="失败了">
@@ -4426,7 +4540,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/05_%E5%A4%B1%E8%B4%A5%E4%BA%86.gif', '失败了', '72.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/05_%E5%A4%B1%E8%B4%A5%E4%BA%86.gif" download="05_失败了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/05_%E5%A4%B1%E8%B4%A5%E4%BA%86.gif" download="05_失败了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="卷起来">
@@ -4448,7 +4562,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/06_%E5%8D%B7%E8%B5%B7%E6%9D%A5.gif', '卷起来', '71.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/06_%E5%8D%B7%E8%B5%B7%E6%9D%A5.gif" download="06_卷起来.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/06_%E5%8D%B7%E8%B5%B7%E6%9D%A5.gif" download="06_卷起来.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="贴贴">
@@ -4470,7 +4584,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/07_%E8%B4%B4%E8%B4%B4.gif', '贴贴', '68.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/07_%E8%B4%B4%E8%B4%B4.gif" download="07_贴贴.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/07_%E8%B4%B4%E8%B4%B4.gif" download="07_贴贴.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="暗中观察">
@@ -4492,7 +4606,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/08_%E6%9A%97%E4%B8%AD%E8%A7%82%E5%AF%9F.gif', '暗中观察', '69.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/08_%E6%9A%97%E4%B8%AD%E8%A7%82%E5%AF%9F.gif" download="08_暗中观察.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/08_%E6%9A%97%E4%B8%AD%E8%A7%82%E5%AF%9F.gif" download="08_暗中观察.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="超时了">
@@ -4514,7 +4628,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p5/09_%E8%B6%85%E6%97%B6%E4%BA%86.gif', '超时了', '75.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p5/09_%E8%B6%85%E6%97%B6%E4%BA%86.gif" download="09_超时了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p5/09_%E8%B6%85%E6%97%B6%E4%BA%86.gif" download="09_超时了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -4548,7 +4662,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif', '吃拉面', '30.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif" download="01_吃拉面.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/01_%E5%90%83%E6%8B%89%E9%9D%A2.gif" download="01_吃拉面.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="偷偷看">
@@ -4570,7 +4684,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif', '偷偷看', '25.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif" download="02_偷偷看.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/02_%E5%81%B7%E5%81%B7%E7%9C%8B.gif" download="02_偷偷看.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="吃西瓜">
@@ -4592,7 +4706,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif', '吃西瓜', '28.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif" download="03_吃西瓜.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/03_%E5%90%83%E8%A5%BF%E7%93%9C.gif" download="03_吃西瓜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="打call">
@@ -4614,7 +4728,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/04_%E6%89%93call.gif', '打call', '32.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/04_%E6%89%93call.gif" download="04_打call.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/04_%E6%89%93call.gif" download="04_打call.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="眼冒金星">
@@ -4636,7 +4750,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif', '眼冒金星', '28.6 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif" download="05_眼冒金星.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/05_%E7%9C%BC%E5%86%92%E9%87%91%E6%98%9F.gif" download="05_眼冒金星.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="考了一百分">
@@ -4658,7 +4772,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif', '考了一百分', '28.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif" download="06_考了一百分.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/06_%E8%80%83%E4%BA%86%E4%B8%80%E7%99%BE%E5%88%86.gif" download="06_考了一百分.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="变身猫娘">
@@ -4680,7 +4794,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif', '变身猫娘', '30.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif" download="07_变身猫娘.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/07_%E5%8F%98%E8%BA%AB%E7%8C%AB%E5%A8%98.gif" download="07_变身猫娘.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="疑惑问号">
@@ -4702,7 +4816,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif', '疑惑问号', '27.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif" download="08_疑惑问号.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/08_%E7%96%91%E6%83%91%E9%97%AE%E5%8F%B7.gif" download="08_疑惑问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="温暖喝茶">
@@ -4724,7 +4838,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif', '温暖喝茶', '27.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif" download="09_温暖喝茶.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p4/09_%E6%B8%A9%E6%9A%96%E5%96%9D%E8%8C%B6.gif" download="09_温暖喝茶.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -4758,7 +4872,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/01_%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88.gif', '在想什么', '1128.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/01_%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88.gif" download="01_在想什么.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/01_%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88.gif" download="01_在想什么.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="给你小心心">
@@ -4780,7 +4894,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/02_%E7%BB%99%E4%BD%A0%E5%B0%8F%E5%BF%83%E5%BF%83.gif', '给你小心心', '1071.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/02_%E7%BB%99%E4%BD%A0%E5%B0%8F%E5%BF%83%E5%BF%83.gif" download="02_给你小心心.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/02_%E7%BB%99%E4%BD%A0%E5%B0%8F%E5%BF%83%E5%BF%83.gif" download="02_给你小心心.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="头晕眼花">
@@ -4802,7 +4916,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/03_%E5%A4%B4%E6%99%95%E7%9C%BC%E8%8A%B1.gif', '头晕眼花', '1188.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/03_%E5%A4%B4%E6%99%95%E7%9C%BC%E8%8A%B1.gif" download="03_头晕眼花.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/03_%E5%A4%B4%E6%99%95%E7%9C%BC%E8%8A%B1.gif" download="03_头晕眼花.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="快看这个">
@@ -4824,7 +4938,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/04_%E5%BF%AB%E7%9C%8B%E8%BF%99%E4%B8%AA.gif', '快看这个', '1345.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/04_%E5%BF%AB%E7%9C%8B%E8%BF%99%E4%B8%AA.gif" download="04_快看这个.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/04_%E5%BF%AB%E7%9C%8B%E8%BF%99%E4%B8%AA.gif" download="04_快看这个.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="真的假的">
@@ -4846,7 +4960,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/05_%E7%9C%9F%E7%9A%84%E5%81%87%E7%9A%84.gif', '真的假的', '968.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/05_%E7%9C%9F%E7%9A%84%E5%81%87%E7%9A%84.gif" download="05_真的假的.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/05_%E7%9C%9F%E7%9A%84%E5%81%87%E7%9A%84.gif" download="05_真的假的.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="懂了懂了">
@@ -4868,7 +4982,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/06_%E6%87%82%E4%BA%86%E6%87%82%E4%BA%86.gif', '懂了懂了', '1204.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/06_%E6%87%82%E4%BA%86%E6%87%82%E4%BA%86.gif" download="06_懂了懂了.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/06_%E6%87%82%E4%BA%86%E6%87%82%E4%BA%86.gif" download="06_懂了懂了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拒绝">
@@ -4890,7 +5004,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/07_%E6%8B%92%E7%BB%9D.gif', '拒绝', '1153.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/07_%E6%8B%92%E7%BB%9D.gif" download="07_拒绝.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/07_%E6%8B%92%E7%BB%9D.gif" download="07_拒绝.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="不行">
@@ -4912,7 +5026,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/08_%E4%B8%8D%E8%A1%8C.gif', '不行', '1104.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/08_%E4%B8%8D%E8%A1%8C.gif" download="08_不行.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/08_%E4%B8%8D%E8%A1%8C.gif" download="08_不行.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="心累">
@@ -4934,7 +5048,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p3/09_%E5%BF%83%E7%B4%AF.gif', '心累', '1478.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p3/09_%E5%BF%83%E7%B4%AF.gif" download="09_心累.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p3/09_%E5%BF%83%E7%B4%AF.gif" download="09_心累.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -4968,7 +5082,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/01_%E7%9C%9F%E9%A6%99.gif', '真香', '1298.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/01_%E7%9C%9F%E9%A6%99.gif" download="01_真香.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/01_%E7%9C%9F%E9%A6%99.gif" download="01_真香.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="困了">
@@ -4990,7 +5104,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/02_%E5%9B%B0%E4%BA%86.gif', '困了', '1264.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/02_%E5%9B%B0%E4%BA%86.gif" download="02_困了.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/02_%E5%9B%B0%E4%BA%86.gif" download="02_困了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="加油">
@@ -5012,7 +5126,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/03_%E5%8A%A0%E6%B2%B9.gif', '加油', '1331.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/03_%E5%8A%A0%E6%B2%B9.gif" download="03_加油.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/03_%E5%8A%A0%E6%B2%B9.gif" download="03_加油.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好害羞">
@@ -5034,7 +5148,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/04_%E5%A5%BD%E5%AE%B3%E7%BE%9E.gif', '好害羞', '1197.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/04_%E5%A5%BD%E5%AE%B3%E7%BE%9E.gif" download="04_好害羞.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/04_%E5%A5%BD%E5%AE%B3%E7%BE%9E.gif" download="04_好害羞.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="嘿嘿">
@@ -5056,7 +5170,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/05_%E5%98%BF%E5%98%BF.gif', '嘿嘿', '1285.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/05_%E5%98%BF%E5%98%BF.gif" download="05_嘿嘿.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/05_%E5%98%BF%E5%98%BF.gif" download="05_嘿嘿.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="救命">
@@ -5078,7 +5192,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/06_%E6%95%91%E5%91%BD.gif', '救命', '1198.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/06_%E6%95%91%E5%91%BD.gif" download="06_救命.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/06_%E6%95%91%E5%91%BD.gif" download="06_救命.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="我拒绝">
@@ -5100,7 +5214,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/07_%E6%88%91%E6%8B%92%E7%BB%9D.gif', '我拒绝', '1217.7 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/07_%E6%88%91%E6%8B%92%E7%BB%9D.gif" download="07_我拒绝.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/07_%E6%88%91%E6%8B%92%E7%BB%9D.gif" download="07_我拒绝.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="啥问号">
@@ -5122,7 +5236,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/08_%E5%95%A5%E9%97%AE%E5%8F%B7.gif', '啥问号', '1262.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/08_%E5%95%A5%E9%97%AE%E5%8F%B7.gif" download="08_啥问号.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/08_%E5%95%A5%E9%97%AE%E5%8F%B7.gif" download="08_啥问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拜托了">
@@ -5144,7 +5258,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p2/09_%E6%8B%9C%E6%89%98%E4%BA%86.gif', '拜托了', '1679.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p2/09_%E6%8B%9C%E6%89%98%E4%BA%86.gif" download="09_拜托了.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p2/09_%E6%8B%9C%E6%89%98%E4%BA%86.gif" download="09_拜托了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -5178,7 +5292,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/01_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif', '震惊问号', '1298.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/01_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif" download="01_震惊问号.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/01_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif" download="01_震惊问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好可爱">
@@ -5200,7 +5314,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/02_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif', '好可爱', '1218.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/02_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif" download="02_好可爱.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/02_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif" download="02_好可爱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="呜呜呜">
@@ -5222,7 +5336,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/03_%E5%91%9C%E5%91%9C%E5%91%9C.gif', '呜呜呜', '1325.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/03_%E5%91%9C%E5%91%9C%E5%91%9C.gif" download="03_呜呜呜.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/03_%E5%91%9C%E5%91%9C%E5%91%9C.gif" download="03_呜呜呜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="就这">
@@ -5244,7 +5358,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/04_%E5%B0%B1%E8%BF%99.gif', '就这', '1346.2 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/04_%E5%B0%B1%E8%BF%99.gif" download="04_就这.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/04_%E5%B0%B1%E8%BF%99.gif" download="04_就这.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="哈哈哈">
@@ -5266,7 +5380,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/05_%E5%93%88%E5%93%88%E5%93%88.gif', '哈哈哈', '1284.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/05_%E5%93%88%E5%93%88%E5%93%88.gif" download="05_哈哈哈.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/05_%E5%93%88%E5%93%88%E5%93%88.gif" download="05_哈哈哈.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="服了">
@@ -5288,7 +5402,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/06_%E6%9C%8D%E4%BA%86.gif', '服了', '1106.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/06_%E6%9C%8D%E4%BA%86.gif" download="06_服了.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/06_%E6%9C%8D%E4%BA%86.gif" download="06_服了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="再说一遍">
@@ -5310,7 +5424,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/07_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif', '再说一遍', '1355.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/07_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif" download="07_再说一遍.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/07_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif" download="07_再说一遍.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拿捏了_墨镜拽姐">
@@ -5332,7 +5446,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/08_%E6%8B%BF%E6%8D%8F%E4%BA%86_%E5%A2%A8%E9%95%9C%E6%8B%BD%E5%A7%90.gif', '拿捏了_墨镜拽姐', '1378.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/08_%E6%8B%BF%E6%8D%8F%E4%BA%86_%E5%A2%A8%E9%95%9C%E6%8B%BD%E5%A7%90.gif" download="08_拿捏了_墨镜拽姐.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/08_%E6%8B%BF%E6%8D%8F%E4%BA%86_%E5%A2%A8%E9%95%9C%E6%8B%BD%E5%A7%90.gif" download="08_拿捏了_墨镜拽姐.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="走了_金光闪耀">
@@ -5354,7 +5468,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/09_%E8%B5%B0%E4%BA%86_%E9%87%91%E5%85%89%E9%97%AA%E8%80%80.gif', '走了_金光闪耀', '1456.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/09_%E8%B5%B0%E4%BA%86_%E9%87%91%E5%85%89%E9%97%AA%E8%80%80.gif" download="09_走了_金光闪耀.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/09_%E8%B5%B0%E4%BA%86_%E9%87%91%E5%85%89%E9%97%AA%E8%80%80.gif" download="09_走了_金光闪耀.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拿捏了走了_完整连贯版">
@@ -5376,7 +5490,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/p1/10_%E6%8B%BF%E6%8D%8F%E4%BA%86%E8%B5%B0%E4%BA%86_%E5%AE%8C%E6%95%B4%E8%BF%9E%E8%B4%AF%E7%89%88.gif', '拿捏了走了_完整连贯版', '2751.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/p1/10_%E6%8B%BF%E6%8D%8F%E4%BA%86%E8%B5%B0%E4%BA%86_%E5%AE%8C%E6%95%B4%E8%BF%9E%E8%B4%AF%E7%89%88.gif" download="10_拿捏了走了_完整连贯版.gif">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/p1/10_%E6%8B%BF%E6%8D%8F%E4%BA%86%E8%B5%B0%E4%BA%86_%E5%AE%8C%E6%95%B4%E8%BF%9E%E8%B4%AF%E7%89%88.gif" download="10_拿捏了走了_完整连贯版.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
@@ -5410,7 +5524,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/01_%E5%B0%B1%E8%BF%99.gif', '就这', '91.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/01_%E5%B0%B1%E8%BF%99.gif" download="01_就这.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/01_%E5%B0%B1%E8%BF%99.gif" download="01_就这.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="哈哈哈">
@@ -5432,7 +5546,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/02_%E5%93%88%E5%93%88%E5%93%88.gif', '哈哈哈', '89.9 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/02_%E5%93%88%E5%93%88%E5%93%88.gif" download="02_哈哈哈.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/02_%E5%93%88%E5%93%88%E5%93%88.gif" download="02_哈哈哈.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="服了">
@@ -5454,7 +5568,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/03_%E6%9C%8D%E4%BA%86.gif', '服了', '92.3 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/03_%E6%9C%8D%E4%BA%86.gif" download="03_服了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/03_%E6%9C%8D%E4%BA%86.gif" download="03_服了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="再说一遍">
@@ -5476,7 +5590,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif', '再说一遍', '87.5 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif" download="04_再说一遍.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif" download="04_再说一遍.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="拿捏了">
@@ -5498,7 +5612,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif', '拿捏了', '90.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif" download="05_拿捏了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif" download="05_拿捏了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="震惊问号">
@@ -5520,7 +5634,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif', '震惊问号', '88.1 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif" download="06_震惊问号.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif" download="06_震惊问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="好可爱">
@@ -5542,7 +5656,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif', '好可爱', '87.0 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif" download="07_好可爱.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif" download="07_好可爱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="呜呜呜">
@@ -5564,7 +5678,7 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif', '呜呜呜', '89.8 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif" download="08_呜呜呜.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif" download="08_呜呜呜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
         <div class="sticker-card" data-title="走了">
@@ -5586,11 +5700,223 @@
           </div>
           <div class="sticker-actions">
             <button class="btn btn-preview" onclick="openModal('assets/static/09_%E8%B5%B0%E4%BA%86.gif', '走了', '90.4 KB')">🔍 放大</button>
-            <a class="btn btn-dl" href="assets/static/09_%E8%B5%B0%E4%BA%86.gif" download="09_走了.png">💾 保存</a>
+            <a class="btn btn-dl btn-card-save" href="assets/static/09_%E8%B5%B0%E4%BA%86.gif" download="09_走了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
           </div>
         </div>
       </div>
     </section>
+  
+    <!-- 第00弹 精选动图 -->
+    <section id="section-p0" class="section-block ">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-title">⚡ 第00弹 · 经典精选动图</h2>
+          <span class="section-badge">HOT 爆款动图</span>
+        </div>
+        <p class="section-desc">就这、哈哈哈、服了、再说一遍、拿捏了、震惊问号、好可爱、呜呜呜、走了 (9款经典动图)</p>
+      </div>
+      <div class="sticker-grid">
+        <div class="sticker-card" data-title="就这">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/01_%E5%B0%B1%E8%BF%99.gif?v=wechat_gif_1794823386" 
+                 alt="就这" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/01_%E5%B0%B1%E8%BF%99.gif?v=wechat_gif_1794823386', '就这', '566.8 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">就这</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>566.8 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/01_%E5%B0%B1%E8%BF%99.gif?v=wechat_gif_1794823386', '就这', '566.8 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/01_%E5%B0%B1%E8%BF%99.gif?v=wechat_gif_1794823386" download="01_就这.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="哈哈哈">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/02_%E5%93%88%E5%93%88%E5%93%88.gif?v=wechat_gif_1794823386" 
+                 alt="哈哈哈" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/02_%E5%93%88%E5%93%88%E5%93%88.gif?v=wechat_gif_1794823386', '哈哈哈', '505.0 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">哈哈哈</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>505.0 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/02_%E5%93%88%E5%93%88%E5%93%88.gif?v=wechat_gif_1794823386', '哈哈哈', '505.0 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/02_%E5%93%88%E5%93%88%E5%93%88.gif?v=wechat_gif_1794823386" download="02_哈哈哈.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="服了">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/03_%E6%9C%8D%E4%BA%86.gif?v=wechat_gif_1794823386" 
+                 alt="服了" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/03_%E6%9C%8D%E4%BA%86.gif?v=wechat_gif_1794823386', '服了', '583.2 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">服了</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>583.2 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/03_%E6%9C%8D%E4%BA%86.gif?v=wechat_gif_1794823386', '服了', '583.2 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/03_%E6%9C%8D%E4%BA%86.gif?v=wechat_gif_1794823386" download="03_服了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="再说一遍">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif?v=wechat_gif_1794823386" 
+                 alt="再说一遍" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif?v=wechat_gif_1794823386', '再说一遍', '490.2 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">再说一遍</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>490.2 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif?v=wechat_gif_1794823386', '再说一遍', '490.2 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/04_%E5%86%8D%E8%AF%B4%E4%B8%80%E9%81%8D.gif?v=wechat_gif_1794823386" download="04_再说一遍.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="拿捏了">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif?v=wechat_gif_1794823386" 
+                 alt="拿捏了" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif?v=wechat_gif_1794823386', '拿捏了', '579.7 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">拿捏了</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>579.7 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif?v=wechat_gif_1794823386', '拿捏了', '579.7 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/05_%E6%8B%BF%E6%8D%8F%E4%BA%86.gif?v=wechat_gif_1794823386" download="05_拿捏了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="震惊问号">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" 
+                 alt="震惊问号" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386', '震惊问号', '487.0 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">震惊问号</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>487.0 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386', '震惊问号', '487.0 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/06_%E9%9C%87%E6%83%8A%E9%97%AE%E5%8F%B7.gif?v=wechat_gif_1794823386" download="06_震惊问号.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="好可爱">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif?v=wechat_gif_1794823386" 
+                 alt="好可爱" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif?v=wechat_gif_1794823386', '好可爱', '570.0 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">好可爱</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>570.0 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif?v=wechat_gif_1794823386', '好可爱', '570.0 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/07_%E5%A5%BD%E5%8F%AF%E7%88%B1.gif?v=wechat_gif_1794823386" download="07_好可爱.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="呜呜呜">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif?v=wechat_gif_1794823386" 
+                 alt="呜呜呜" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif?v=wechat_gif_1794823386', '呜呜呜', '492.9 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">呜呜呜</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>492.9 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif?v=wechat_gif_1794823386', '呜呜呜', '492.9 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/08_%E5%91%9C%E5%91%9C%E5%91%9C.gif?v=wechat_gif_1794823386" download="08_呜呜呜.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+        <div class="sticker-card" data-title="走了">
+          <div class="sticker-img-box">
+            <img class="sticker-img" 
+                 src="assets/p0/09_%E8%B5%B0%E4%BA%86.gif?v=wechat_gif_1794823386" 
+                 alt="走了" 
+                 loading="lazy"
+                 onclick="openModal('assets/p0/09_%E8%B5%B0%E4%BA%86.gif?v=wechat_gif_1794823386', '走了', '569.5 KB')"
+                 title="长按发送或添加到微信表情">
+          </div>
+          <div class="sticker-info">
+            <div class="sticker-name">走了</div>
+            <div class="sticker-meta">
+              <span>微信GIF</span>
+              <span>•</span>
+              <span>569.5 KB</span>
+            </div>
+          </div>
+          <div class="sticker-actions">
+            <button class="btn btn-preview" onclick="openModal('assets/p0/09_%E8%B5%B0%E4%BA%86.gif?v=wechat_gif_1794823386', '走了', '569.5 KB')">🔍 放大</button>
+            <a class="btn btn-dl btn-card-save" href="assets/p0/09_%E8%B5%B0%E4%BA%86.gif?v=wechat_gif_1794823386" download="09_走了.gif" onclick="saveStickerDirect(event, this)" title="一键保存此表情到本地">💾 一键保存</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Bottom Floating Bar -->
@@ -5616,7 +5942,7 @@
       <div id="wechatSavePill" class="wechat-save-pill">👆 微信专属提示：长按上方大图，在弹出菜单选择【保存图片】或【发送给朋友】（发给文件传输助手长按即可添加到微信表情包，无需跳出浏览器！）</div>
       <div class="modal-tip">📱 长按上方大图即可添加微信表情或发送好友</div>
       <div class="modal-actions">
-        <a id="modalDlBtn" class="btn btn-main" href="" download="">💾 下载原文件</a>
+        <a id="modalDlBtn" class="btn btn-main" href="" download="" onclick="saveModalDirect(event, this)">💾 一键保存到相册/电脑</a>
         <button class="btn btn-dl" onclick="copyImageLink()">📋 复制链接</button>
       </div>
     </div>
@@ -5842,6 +6168,45 @@
       }
     });
     
+  
+    // Direct Save Function for Single Sticker
+    function saveStickerDirect(e, btn) {
+      if (e) {
+        e.stopPropagation();
+      }
+      const href = btn.getAttribute('href');
+      const downloadName = btn.getAttribute('download') || '表情包.gif';
+      
+      // Visual feedback
+      const originalText = btn.innerHTML;
+      btn.classList.add('saved');
+      btn.innerHTML = '✅ 已保存';
+      setTimeout(() => {
+        btn.classList.remove('saved');
+        btn.innerHTML = originalText;
+      }, 1800);
+
+      if (isWeChat) {
+        showToast('💾 已触发保存！若微信未弹下载，可长按大图【保存图片】');
+      } else {
+        showToast('💾 已开始保存：' + downloadName);
+      }
+    }
+
+    // Modal Direct Save
+    function saveModalDirect(e, btn) {
+      if (isWeChat) {
+        showToast('📱 微信提示：长按上方大图，在弹出菜单选择【保存图片】或【发送给朋友】！');
+      } else {
+        showToast('💾 已开始下载保存！');
+      }
+    }
+
+    // Save All ZIP Click Feedback
+    function onSaveAllClick() {
+      showToast('📦 正在下载全量208款微信直发GIF表情包压缩包...');
+    }
+
   </script>
 
   <!-- WeChat Tutorial Modal -->
